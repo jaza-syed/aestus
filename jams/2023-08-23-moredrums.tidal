@@ -17,6 +17,7 @@ clutchOut 5
 clutchOut 4
 clutchOut 2
 clutchOut 3
+hush
 d2 $ every 16 silent $ every 8 (rotL 0.25)
    $ pressBy "0.07 0.1" (s "[kick:5 kick:5] [cp [~ cp]] [kick:5 kick:5] <[cp cp] kick:5>" )
 d2 $ silence
@@ -27,6 +28,7 @@ d4 $ fast 2 $ every 16 silent
   <| n "f2 [~ g2]" # accelerate 0.1 # voice 1 # gain 1.2
 d6 $ every 2 (juxBy 0.4 rev) $ pressBy 0.05 $ fast 4 $ n "0*2 1" # s "clak" # pan 0.2
 d5 $ juxBy 0.4 rev $ fast 2 $ n "0 1 2 3" # s "click" # lpf 10000 # pan 0.8 # gain 1
+hush
 
 d7 $ pressBy 0.02 $ s "control" <| n "[0 1] [0 0 1]" # room 0.1
 d3 $ every' 16 4 silent $ every' 16 6 silent $ every 4 (spin 4)

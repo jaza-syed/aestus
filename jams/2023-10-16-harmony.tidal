@@ -4,11 +4,43 @@ d1 $ n "0 1 2 3 4 5 6 7" # s "superhex" # release ("0 1/64 2/64 3/64") # attack 
 -- attack/hold/release - in seconds!  -- TODO: write alternative that works in proportion of event?
 hush
 
--- I also rely heavily on all. 
+-- I also rely heavily on all.
 -- One trick in particular really helps, which is to apply transformatiopn (ie. chop or timeLoop)
 -- via all but leaving them bypassed. It works quite well to use a function to switch between id
 -- and the transformation. This way, if you assign the control parameter to be a midi control
 -- (such as a button) you suddenly have a highly interactive performance element to use anytime.
 -- Using this trick with timeLoop is 👌 by far my favorite thing in tidal yet.
 
-:i all
+:i all  slow 2 $
+d1
+  $ slow 2
+  $ every 1 (|-12)
+  $ n "0 ~ [-6 ~ 6 8] -2"
+  # s "superfm"
+  # release "[1 0.25 0.25 0.25]"
+  # delay 0.25 # delayfb 0.5 # delayt 8
+  hush
+-- TODO: practice mininotation arithmetic - e.g. scaling / adding values
+d1
+  $ superimpose (# detune "<0.01 0.02 0.03 0.02>")
+  $ degradeBy 0
+  $ fast 4
+  $ iter 4
+  $ degradeBy 0.05
+  $ rolledBy 0.75
+  $ n "<c5'maj'4 d5'maj'6 e5'min'7 d5'min'<4 2 4>>"
+  # s "superfm"
+  # delay (range 0.2 0.1 isaw) # delayfb (range 0.25 0.75 saw) # delayt (range 0.25 0.75 saw) # lock 1
+  # lpf (range 3000 6000 saw) # lpq 0.3
+
+
+  hush
+  # squiz 0.5
+d2 $
+  fast 2 $
+  arp "<thumbup pinkyupdown converge>" $
+  n "<c5'maj'4 d5'maj'4>"
+  # s "superfm"
+  # gain 0.5
+  # release 0.25
+  # room 0.75 # size 0.75
