@@ -1,0 +1,23 @@
+do
+  let drum = inhabit [("bd",s "sine" |- accelerate 1.5),("hh",s "alphabet:7" # begin 0.7 # hpf 7000),("sd",s "invaders:3" # speed 12)]
+  d1 $ drum "[bd*8?, [~hh]*4, sd(6,16)]"
+
+d1 $ stack [
+  every 2 (mask "t t t ~") $ pressBy (slow 2 $ range 0.04 0.08 sine) $ s "[hh hh <hh ~> <~ hh>]*4",
+  every 4 (mask "~ t") $ pressBy "<0 0.01 0.02 0>" $ s "bd(6,16)",
+  juxBy "<0.4 0.45 0.5 0.45>" rev $ ghost $ pressBy 0.44 $ s "ab" <| n "~ . 7 8 . ~ . 7 8" # gain 1.6
+] # room 1 # dry 0.95
+hush
+
+-- every x (# effect y) - you can use `(# effect y)` to isolate
+-- pattern application as a function
+
+hush
+-- IDEA: cut groups with ab kit: kick1/2, closedhh/openhh
+
+-- Default "global" effects in superdirt
+-- GlobalDirtEffect('dirt_delay', [ 'delaytime', 'delayfeedback', 'delaySend', 'delayAmp', 'lock', 'cps' ]),
+-- GlobalDirtEffect('dirt_reverb', [ 'size', 'room', 'dry' ]),
+-- GlobalDirtEffect('dirt_leslie', [ 'leslie', 'lrate', 'lsize' ]),
+-- GlobalDirtEffect('dirt_rms', [ 'rmsReplyRate', 'rmsPeakLag' ]),
+-- GlobalDirtEffect('dirt_monitor', [ 'limitertype' ]) ]

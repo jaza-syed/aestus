@@ -1,0 +1,39 @@
+d1 $ off (slow 8 $ segment 8 $ range 0.2 0.3 sine) id $ striate 6 $ s "blue:1" # legato 2
+
+d1 $ echo 4 (-0.2) 0.5 $ every 2 (inside "<2 4>" rev) $ hurry 4 $ splice 8 "<0*1.5 1*2 2 _ 3*2, 4 5*1.5 6 _ 7*2>" $ s "blue:1"
+
+-- chop: split each sample event into n sample events over the same time
+-- striate: interlace samples. split each sample into n parts
+-- then play the loop n times playing the i'th part of each sample on loop i from 1 to n
+-- with fast n applied so that the loop results in the same length
+-- TODO: Exercise: implement striate in terms of begin/end, fast etc
+
+
+
+d1 $ smash 3 [1,2,3] $ sound "numbers:0 numbers:1 numbers:2 numbers:3"
+hush
+
+-- loopAt n is just slow n |* speed 1/n  (where speed has unit "c")
+-- see https://userbase.tidalcycles.org/unit.html
+d1 $ chop 32 $ loopAt 3 $ sound "breaks125 bev"
+
+d1 $ juxBy 0.6 (|* speed "2") $ loopAt "<4 6 2 3>" $ chop 12 $ sound "fm:14"
+hush
+
+
+d1 $ sound "blue:1"
+
+-- echo depth time feedback
+--
+
+-- live performance idea - start with clean sample then fuck it up slowly
+-- could start with chopped up sample, then clutch into xfade?
+d1 $ stack [
+s "[bd,co sd bd sd]",
+pressBy "<0 q h 3q>" $ s "cp"
+]
+hush
+d1 $ every 4 (# cut 1) $ bite 4 "0 1*2 2*4 [~ 3]" $ n "0 .. 7" # sound "drum"
+-- chew: splits pattern into 4 then pattern those bits and speeds up playback by same factor as pattern speedup
+d1 $ chew 4 "0 1*2 2*4 [~ 3]" $ n "0 .. 7" # sound "drum"
+hush

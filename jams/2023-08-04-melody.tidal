@@ -1,0 +1,33 @@
+d1 $ sound "bd:3 sn:2"
+hush
+
+setcps 0.58
+
+d1 $ fast 1.5
+   $ every 8 silent
+   $ n (arp "<diverge converge <diverge up>>" "a3'dim'8")
+   # s "cyclo"
+   # voice 0.5
+   # room (slow 4 $ range 0 "<0.2 0.35 0.5>" saw)
+   # sz (slow 4 $ range 0.7 0.9 sine)
+
+  hush
+
+
+
+d1 $ n (slow 2 $ run 8) # sound "supkersaw"
+
+import Sound.Tidal.Chords
+chordList
+
+
+d1 $ sound "bd*2 [[~ lt] sn:3] lt:1 [ht mt*2]"
+
+-- d1 $ jux' [id,rev,(# speed 2)] $ every 2 ("<0.25 0.125 0.5>" <~) $ sound "bd*2 [[~ lt] sn:3] lt:1 [ht mt*2]"
+--   # squiz "<1 2.5 2>"
+--   # room (slow 4 $ range 0 0.2 saw)
+--   # sz 0.5
+--   # orbit 1
+hush
+
+:t (<~)

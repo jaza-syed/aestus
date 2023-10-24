@@ -1,0 +1,36 @@
+hush
+d1 $ off (0.25) (+12) $ slow "1 2" $ sound "superwavemechanics" <| n "<0 1 2>" # octave 2
+  # detune "<0 0.1 0.2 0.3 0.4>" # voice 0.5 -- synth
+  # delay 0.8 # delayfb 0.8 # delaytime "<0.25 0.5 0.75>" # lock 1 -- delay
+  # triode "<0 0.5 0 1 0 1.5>"
+
+-- superwavemechanics:
+-- env: sinusoidal envelope
+-- i: 8 random integers between 0 and 3, as an array of 8 oscillators
+-- d: scale i and increase range with detune
+-- resonant filter applied to white noise.
+-- cuttoff is d scaled by ratios (supercollider repeats shorter array to match length of longer)
+-- bandwidth ratio is a function of voice
+-- apply reverb->limiter->hpf->pan+env
+--
+
+-- // from synthdef.art
+-- // #wavemechanics
+-- // responds to accelerate (for pitch glide)
+-- //                    detune (for pitch randomization)
+-- //                    voice (to color/whiten the noise)
+-- //                    resonance (affects reverberation)
+-- (
+-- SynthDef(\superwavemechanics, {|out, pan, freq, sustain, accelerate, detune=0, voice=0, resonance=0, speed=1|
+-- 	var env, sound, i, r, d, bwr, sz;
+-- 	freq = freq * DirtFreqScale.kr(speed, accelerate, sustain);
+-- 	env = EnvGen.ar(Env.sine(1.0), timeScale:sustain, doneAction:2);
+-- 	i = TIRand.kr(0, 3, Impulse.kr(sustain/8).dup(8));
+-- 	r = [3,5,8,9]/8;
+-- 	detune = min(detune, 1.5);
+-- 	d = Rand(1.6*i - detune, 1.7*i + detune).round(0.25);
+-- 	sound = Resonz.ar(WhiteNoise.ar(0.5), freq * r * d, 0.01 + voice.linexp(0,1,1e-3,1));
+-- 	sound = HPF.ar(Limiter.ar(55 * GVerb.ar(sound, resonance.linexp(0,1,99,0.1),10) ), 30).sanitize;
+-- 	Out.ar(out, DirtPan.ar(sound.flat, ~dirt.numChannels, pan, env));
+-- }).add;
+-- );

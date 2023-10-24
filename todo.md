@@ -1,0 +1,6 @@
+- learn random
+- Controlling tidal with a MIDI controller
+- Hooking up tidal to ableton for recording
+- Creating synths with `SuperDirt` +  ugens
+- Install mi-ugens https://tidalcycles.org/docs/reference/mi-ugens-installation/
+- Install tidal drum machines https://github.com/ritchse/tidal-drum-machine

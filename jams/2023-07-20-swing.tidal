@@ -1,0 +1,8 @@
+d1 $ stack [ ghost $ sound "~ sn", sound "bd*2 [~ bd]" ]
+d1 $ echo 4 (-0.2) 0.5 $ sound "bd sn"
+
+d1 $ echo 4 0.2 0.5 $ swingBy (1/3) 4 $ sound "hi lo sn [hh hh] ~ lo hi lo"
+
+d2 $ fast (segment 16 sine) $ n (arpg "'min7 [0,4,7,11]") # sound "supersaw"
+
+hush

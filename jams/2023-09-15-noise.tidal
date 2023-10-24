@@ -1,0 +1,24 @@
+
+-- trick: playing random notes on a scale
+d1 $ sound "superwavemechanics"
+    <| n (scale "mixolydian" $ segment 8 $ irand 8) # octave 4
+    # rate 2
+    hush
+d1 $ sound "superfork"
+    <| n (scale "mixolydian" $ segment 8 $ "0 2 4 6") # octave 4
+    # accelerate (slow 4 $ range 0 1 sine)
+
+d1 $ sound "superwavemechanics" <| n "0 1" # octave 2 # detune 0
+
+d1 $ slow 4 $ sound "superfork" # n 1
+d2 $ sound "hi lo bd sn"
+d1 $ sound
+hush
+d1 $ sound "bd sn"
+d1 $ silence
+d2 $ sound "cp cp cp cp cp cp cp cp cp cp"
+d1 $ silence
+scaleList
+hush
+-- todo: if emphasis isn't on the one when i write a pattern, just rotL iit
+-- longer patterns:

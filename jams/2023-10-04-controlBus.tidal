@@ -1,0 +1,25 @@
+-- doesn't work - sax sound is only one event so we can't
+-- associate 4 squiz events with it
+d1 $ pressBy 0.06 $ chop 12 $ sound "sax" # legato 1 # (squiz "1 2 5 1.5")
+hush
+d2$ s "bd*4"
+
+-- with buses:
+d1 $ sound "sax" # legato 1 # squizbus 1 "1 2 5 1.5"
+
+-- can use recv variant to receive the control bus
+d1 $ sound "sax" # legato 1 # lpfbus 2 "400 2000 5000" # lpq 0.4 # pan 0
+d2 $ sound "sax" # legato 1 # hpfrecv 2 # pan 1
+d2 $ silence
+
+-- control bus to lfo an effect
+d1 $ slow 6 $ note "c'maj" # s "superpiano" # legato 2
+ # lpq 0.2 # (lpfbus 1 $ segment 512 $ fast 4 $ range 200 2000 $ sine)
+
+-- my turn
+setcps 0.6
+d1 $ fast 1.33 $ rot "<0 0 2 4>" $ s "h" <| n "0 _ 2 3 4 3"
+   # lpq 0.1 # (lpfbus 1 $ segment 512 $ fast "<2 4>" $ rangex 1000 3000 $ sine)
+hus
+
+-- with drone

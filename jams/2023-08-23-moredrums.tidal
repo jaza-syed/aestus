@@ -1,0 +1,37 @@
+setcps 0.6
+d1 $ sound "<[bd sn hi*2 lo  ~ cp] [mt 808bd hi lo!3]>"
+
+-- TODO: something with vocal samples - either a counterpart to this
+--       or actually replacing the snare with a vocal sample
+-
+d1 $ fast 1.5 $ every 12 silent $
+    s (step "snare" "x  xx xx") # (n 4)
+      # (begin $ slow 4 $ range 0 0.02 saw)
+      # (end $ slow 4 $ range 0.9 0.5 isaw)
+      # (lpf $ slow 4 $ range 5000 8000 isaw)
+      # room 0.1 # dry 0.2
+
+clutchOut n = clutchIn n 4 $ silence
+clutchOut 6
+clutchOut 5
+clutchOut 4
+clutchOut 2
+clutchOut 3
+d2 $ every 16 silent $ every 8 (rotL 0.25)
+   $ pressBy "0.07 0.1" (s "[kick:5 kick:5] [cp [~ cp]] [kick:5 kick:5] <[cp cp] kick:5>" )
+d2 $ silence
+d3 $ loopAt 0.5 $ chop 4 $ n "<[0 1 ~ 3] [~ 2 1 [~3]]>" # s "crow"
+d4 $ silence
+d4 $ fast 2 $ every 16 silent
+  $ pressBy "0.02 0.08" $ s "supercomparator"
+  <| n "f2 [~ g2]" # accelerate 0.1 # voice 1 # gain 1.2
+d6 $ every 2 (juxBy 0.4 rev) $ pressBy 0.05 $ fast 4 $ n "0*2 1" # s "clak" # pan 0.2
+d5 $ juxBy 0.4 rev $ fast 2 $ n "0 1 2 3" # s "click" # lpf 10000 # pan 0.8 # gain 1
+
+d7 $ pressBy 0.02 $ s "control" <| n "[0 1] [0 0 1]" # room 0.1
+d3 $ every' 16 4 silent $ every' 16 6 silent $ every 4 (spin 4)
+   $ loopAt 0.5 $ chop 4
+   $ pressBy (range 0.05 0.1 sine) $ n "0 1 ~ 3" # s "crow"
+   # gain 0.9
+hush
+:t stack
