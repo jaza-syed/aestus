@@ -21,18 +21,21 @@ d1
   # delay 0.25 # delayfb 0.5 # delayt 8
   hush
 -- TODO: practice mininotation arithmetic - e.g. scaling / adding values
+hush
+clutchIn 1 8
 d1
   $ superimpose (# detune "<0.01 0.02 0.03 0.02>")
-  $ degradeBy 0
+  $ degradeBy 1
   $ fast 4
   $ iter 4
-  $ degradeBy 0.05
+  $ degradeBy 0
   $ rolledBy 0.75
   $ n "<c5'maj'4 d5'maj'6 e5'min'7 d5'min'<4 2 4>>"
   # s "superfm"
-  # delay (range 0.2 0.1 isaw) # delayfb (range 0.25 0.75 saw) # delayt (range 0.25 0.75 saw) # lock 1
-  # lpf (range 3000 6000 saw) # lpq 0.3
+  # delay 0.1 # delayfb 0.5 # delayt 0.5 # lock 1
+  # lpf 4000
 
+d1 $ sound "bd sn"
 
   hush
   # squiz 0.5

@@ -1,0 +1,38 @@
+:t spaceOut
+d1 $ every 4 (chop 3) $ n " [0 [~ 0]] [~ 0] [~ 0] [0 ~] " # s "lt:1"
+hush
+
+d1 $ fix (silent) (s "cp") $
+ sew "t(11,16)" (n "0 .. 15" # s "future") (s "cp:3*16" # speed sine + 1.5)
+hush
+:t list
+
+d1 $ fast 2 $
+  stack [
+    sound "cp(<3 5>, 8)" # speed sine + 1.0 # pan 0.3,
+    rotR 0.125 $ euclidInv "<3 5>" 8 $ s "future",
+    every 8 (fast 3) $ s "[~hh]*4" # pan 0.7
+  ]
+hush
+d1
+$ s "superfm*4"
+    # n 0
+    # octave 5
+    # gain 0.8
+    # amp1 1
+    # amp2 0
+    # amp3 0
+    # amp4 0
+    # amp5 0
+    # amp6 0
+    # mod12 "0 1 2" -- modulate carrier with envelope affected operator
+    # ratio2 0.25
+    # egrate21 10 -- put the envelope on operator 2
+    # eglevel22 "0.1 0.5 1"
+    # egrate23 "1 10 0.1"
+    # eglevel23 1.5
+    # room 1
+    # feedback 1
+    # mod11 1
+
+-- inhabit: assign strings to patterns, then use those strings in mininotation
