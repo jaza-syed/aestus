@@ -2,6 +2,10 @@
 d1 $ every 4 (chop 3) $ n " [0 [~ 0]] [~ 0] [~ 0] [0 ~] " # s "lt:1"
 hush
 
+-- (un)fix : apply function to events that (do not) match condition
+-- contrast: apply two functions to events, choosing between them whether they
+-- match condition or not
+-- contrastBy: you can use different comparator condition on pattern rather than `==`
 d1 $ fix (silent) (s "cp") $
  sew "t(11,16)" (n "0 .. 15" # s "future") (s "cp:3*16" # speed sine + 1.5)
 hush
@@ -36,3 +40,18 @@ $ s "superfm*4"
     # mod11 1
 
 -- inhabit: assign strings to patterns, then use those strings in mininotation
+d1 $ append (sound "bd*2 sn") (sound "arpy jvbass*2")
+d1 $ cat [sound "bd*2 sn" , sound "arpy jvbass*2"]
+hush
+-- <> can be used as a bin-op form of overlay
+-- any function can be turned into a wet-dry with layer
+layerWet fn wet = layer [(# gain wet), fn . (# gain (1.0-wet))]
+d1 $ swingBy (1/3) 3 $ sound "hh*8"
+
+
+hush
+-- TODO: struct/mask/sew/stictch
+-- TODO: timescale
+-- TODO: https://club.tidalcycles.org/t/sharing-custom-functions/1032/4
+-- TODO: https://github.com/ghalestrilo/libtidal
+-- TODO: more investigations on tonality need some functions for manipulating melody

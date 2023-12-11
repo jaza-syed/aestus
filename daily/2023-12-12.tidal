@@ -1,0 +1,5 @@
+d1 $ fast 1.5 $ drumM "rolandtr808" [
+  "{bd:3(3,8), cp [~[hh, ~rim] lt <oh rim*2>]}",
+  jux rev $ degradeBy 0.2 $ "perc(5,8)" # n (irand 15) # pan (slow 2 sine)
+]
+hush

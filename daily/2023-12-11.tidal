@@ -1,0 +1,6 @@
+d1 $ fast 2
+   $ ghost' 0.33
+   $ struct (iter 4 "t(5,8)")
+   $ n (scale "minPent" $ irand 7)
+   # legato (slow 2 $ range 1 2 saw)
+   # s "superpiano"

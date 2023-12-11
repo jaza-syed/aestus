@@ -1,0 +1,104 @@
+d1 $ superimpose (# detune "<0.01 0.02 0.03 0.02>")
+  $ every 8 (|- n "5")
+  $ every' 8 4 (|+ n "5")
+  $ fast 4
+  $ iter 4
+  $ rolledBy 0.75
+  $ n "<c5'maj'<6 4> d5'maj'6 e5'min'<7 5> d5'min'<4 6 4 8>>"
+  # s "superfm"
+  # delay 0.1 # delayfb (range 0.25 0.75 (slow 16 saw)) # delayt 0.75 # lock 1
+  # fmfeedback (range 0.9 1.1 (slow 16 sine))    -- global multiplier for 'fmod x x' feedback parameters.
+  # fmamp 1 1
+  # fmamp 2 0.5
+  # fmamp 3 1
+  # fmamp 4 0
+  # fmamp 5 0
+  # fmamp 6 0
+  # fmratio 2 0.5
+  # fmdetune 2 1
+  # fmratio 3 0
+  # fmmod 1 1 "0"
+  # fmmod 1 2  (range 0 4 (slow 6 $ sine))   -- fmod a b Pattern  = modulate op a with op b..
+  # fmmod 1 3  (range 0 4 (slow 3 $ sine))
+  # fmmod 3 2  (range 0 3 (slow 2 $ sine))
+  # fmeglevel 1 1 "1" -- envelope generator has 4 rates and 4 steps for each operator...
+  # fmeglevel 1 2 "0.5"
+  # fmeglevel 1 3 "0"
+  # fmeglevel 1 4 "0"
+  # fmegrate 1 1 "10"
+  # fmegrate 1 2 "0.1"
+  # fmegrate 1 3 "0.1"
+  # fmegrate 1 4 "1"
+  # fmeglevel 2 1 "1" -- envelope generator has 4 rates and 4 steps for each operator...
+  # fmeglevel 2 2 "0"
+  # fmeglevel 2 3 "0"
+  # fmeglevel 2 4 "0"
+  # fmegrate 2 1 "1"
+  # fmegrate 2 2 "0.3"
+  # fmegrate 2 3 "0.7"
+  # fmegrate 2 4 "1"
+  # fmeglevel 3 1 "1" -- envelope generator has 4 rates and 4 steps for each operator...
+  # fmeglevel 3 2 "0.2"
+  # fmeglevel 3 3 "0"
+  # fmeglevel 3 4 "1"
+  # fmegrate 3 1 "10"
+  # fmegrate 3 2 "0.5"
+  # fmegrate 3 3 "0.4"
+  # fmegrate 3 4 "1"
+  # room 0.3
+
+d1 $ superimpose (# detune "<0.01 0.02 0.03 0.02>")
+  -- $ every 8 (|+ n "5")
+  -- $ every' 8 4 (|+ n "7 12")
+  $ fast 4
+  $ iter 4
+  $ degradeBy 0.05
+  $ rolledBy 0.75
+  $ n "<c5'maj'<6 4> d5'maj'6 e5'min'<7 5> d5'min'<4 6 4 8>>"
+  # s "superfm"
+  # delay 0.1 # delayfb 0.5 # delayt 0.5 # lock 1
+  # fmfeedback (range 0.9 1.1 (slow 16 sine))    -- global multiplier for 'fmod x x' feedback parameters.
+  # fmamp 1 1      -- amplitudes default to '1', so probably need to set all 6 of them...
+  # fmamp 2 0
+  # fmamp 3 1
+  # fmamp 4 0
+  # fmamp 5 0
+  # fmamp 6 0
+  # fmratio 1 1 -- oscillator frequency is note * ratio + detune Hz.
+  # fmratio 2 0.5 -- (range 0.25 20 (slow 3 $ sine))
+  # fmdetune 2 1
+  # fmratio 3 "<.50>"
+  # fmmod 1 1 "0"
+  # fmmod 1 2  (range 0 4 (slow 6 $ sine))   -- fmod a b Pattern  = modulate op a with op b..
+  # fmmod 1 3  (range 0 4 (slow 3 $ sine))
+  # fmmod 3 2  (range 0 3 (slow 2 $ sine))
+  # fmeglevel 1 1 "1" -- envelope generator has 5 rates and 4 steps for each operator...
+  # fmeglevel 1 2 "0.5"
+  # fmeglevel 1 3 "0"
+  # fmeglevel 1 4 "0"
+  # fmegrate 1 1 "10"
+  # fmegrate 1 2 "0.1"
+  # fmegrate 1 3 "0.1"
+  # fmegrate 1 4 "1"
+  # fmeglevel 2 1 "1" -- envelope generator has 4 rates and 4 steps for each operator...
+  # fmeglevel 2 2 "0"ggGgg
+  # fmeglevel 2 3 "0"
+  # fmeglevel 2 4 "0"
+  # fmegrate 2 1 "1"
+  # fmegrate 2 2 "0.3"
+  # fmegrate 2 3 "0.7"
+  # fmegrate 2 4 "1"
+  # fmeglevel 3 1 "1" -- envelope generator has 4 rates and 4 steps for each operator...
+  # fmeglevel 3 2 "0.2"
+  # fmeglevel 3 3 "0"
+  # fmeglevel 3 4 "1"
+  # fmegrate 3 1 "10"
+  # fmegrate 3 2 "0.5"
+  # fmegrate 3 3 "0.4"
+  # fmegrate 3 4 "1"
+  # room 0.3
+  hush
+
+  d1 $ sound "bd sn"
+
+hush
