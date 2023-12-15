@@ -1,0 +1,12 @@
+d1 $ drumM "rolandtr909" [
+  every 3 (# squiz 1.2) $ every 2 (fast 2) $ every 4 rev $
+    struct "t(3,8) t*4" "bd:1 bd:0@10" # gain 1.2,
+  every 6 (echo 3 0.25 0.75) $ outside 2 (every 4 silent)
+    $ degradeBy 0.2 $ fast 4 $
+    struct "<t*3 ,~t t*2 t*3>" "hh:0 hh:1" ,
+  fast 2 $ struct "<t*2 t*3> [~t]" "cp" #
+    n (timeLoop 4 $ segment 8 (irand 4)) # gain 1.2
+]  
+
+d2 $ juxBy (slow 3 sine) (fast 2) $ ghost' 0.25 $ s "plaits" <| n "a@5 b@7"
+  # engine 2 # octave 2 # gain 1.2

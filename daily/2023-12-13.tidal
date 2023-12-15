@@ -1,0 +1,4 @@
+d1 $ timeLoop 4
+   $ struct "t*16"
+   $ n (scale "ritusen" $ irand 5)
+   # s "supercomparator"
