@@ -6,7 +6,15 @@
 
 # Samples
 
-# Synthesizers
+# Synths
+- plaits
+
+# effects
+
+# Drum machines
+## "rolandtr909"
+- bd 0 basic, 1
+
 
 # Global audio effects
 - `cut`

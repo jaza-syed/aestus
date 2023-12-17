@@ -232,3 +232,4 @@ d1 $ s "wobble" -- one subbass hit
 d1 $ s "world" <| n (run 3) -- three kit hits, meh
 d1 $ s "xmas" -- voice saying 'merry christmas'
 d1 $ slow 2 $ s "yeah" <| n (run 31) -- big selection of short clicks and pops, usable
+hush

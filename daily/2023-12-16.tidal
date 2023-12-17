@@ -1,0 +1,41 @@
+jumpMod 1 2 $ outside 6 (every 3 $ (+ n 5)) $ every 8 (# lpf 1000) $ degradeBy (range 0 0.5 $ slow 16 sine ) $ juxBy 0.8 rev $
+  layer [id,
+    ((fast 2 . (# pan (fast 2 square))) . (# harm 0.4) . (# gain 1.2)),
+    (rotR 0.5625 . (+ n (-5) . brak . (# harm 0.6))] $
+  n (scale "<locrian dorian aeloian>" $ timeLoop 4 (segment 8 $ irand 7)) # octave 2
+  # s "plaits" # engine 2
+  # morph (range 0.6 0.9 $ slow 4 sine)
+  # timbre (range 0.5 0.75 $ slow 4 saw)
+  # harm 0.5
+  # level 0.9 # lpg 0.5 0.5 # mode 0
+  # verb (slow 3 (range 0.1 0.2 saw)) 0.1 0.2 0.2
+
+  :t wait
+  hush
+
+d2 $ every 8 silent $ off 0.5 (rotL 5 . slow 2) $
+   drumM "rolandtr909" [
+   ghost $ s "cp*2 cp ~cp" # speed (range 0.8 1.2 sine) # squiz 1.2  # n 1 # cut 1,
+   every 3 (rotL 0.5) $ fast 2 $ s "<bd(3,8) bd(5,8)>" # n 1 # gain 0.8 # cut 1 # lpf 1000
+   --(fast(8/7) $ s "hh(4, 7)" <| n (segment 12 $ timeLoop 8 $ irand 4) )# cut 2 # hpf 1000
+   ]
+  # verb (slow 3 (range 0.1 0.2 saw)) 0.1 0.2 0.2 # gain 1.2
+
+d3 $ every' 8 4 silent $ outside 3 (every 3 $ echo 3 0.5 0.25 . (# cut 2)) $
+  jux rev $ hurry 2 $ loopAt 2 $ splice 8 "0 4 6 5@3 ~ 7 3@2 3 2 1@2" $ s "ravemono" |> n (slow 4 $ run 4) # cut 1
+
+mt' a b = mt a $ filterWhen (>=0) $ b
+
+-- engine 2: 2-op fm. harm: fm ratio, timbre: mod ind, morph: feedback
+
+hush
+-- params in range 0-1:
+-- timbre (brightness)
+-- harm (harmonics)
+-- morph ("latent timbral vibration")
+-- level: low pass filter opening (defult 1 fully open)
+-- lpg d c : gate decay and color (default 0)
+
+d2 $ juxBy (slow 3 sine) (fast 2) $ ghost' 0.25 $ s "plaits" <| n "a@5 b@7"
+  # engine 2 # octave 2 # gain 1.2
+  hush
