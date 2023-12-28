@@ -66,6 +66,39 @@ let only = (hush >>)
     d14 = p 14
     d15 = p 15
     d16 = p 16
+    jm1 m = jumpMod 1 m . (# orbit 0)
+    jm2 m = jumpMod 2 m . (# orbit 1)
+    jm3 m = jumpMod 3 m . (# orbit 2)
+    jm4 m = jumpMod 4 m . (# orbit 3)
+    jm5 m = jumpMod 5 m . (# orbit 4)
+    jm6 m = jumpMod 6 m . (# orbit 5)
+    jm7 m = jumpMod 7 m . (# orbit 6)
+    xf1 m = xfadeIn 1 m . (# orbit 0)
+    xf2 m = xfadeIn 2 m . (# orbit 1)
+    xf3 m = xfadeIn 3 m . (# orbit 2)
+    xf4 m = xfadeIn 4 m . (# orbit 3)
+    xf5 m = xfadeIn 5 m . (# orbit 4)
+    xf6 m = xfadeIn 6 m . (# orbit 5)
+    xf7 m = xfadeIn 7 m . (# orbit 6)
+    in1 m = interpolateIn 1 m . (# orbit 0)
+    in2 m = interpolateIn 2 m . (# orbit 1)
+    in3 m = interpolateIn 3 m . (# orbit 2)
+    in4 m = interpolateIn 4 m . (# orbit 3)
+    in5 m = interpolateIn 5 m . (# orbit 4)
+    in6 m = interpolateIn 6 m . (# orbit 5)
+    in7 m = interpolateIn 7 m . (# orbit 6)
+    cl1 m = clutchIn 1 m . (# orbit 0)
+    cl2 m = clutchIn 2 m . (# orbit 1)
+    cl3 m = clutchIn 3 m . (# orbit 2)
+    cl4 m = clutchIn 4 m . (# orbit 3)
+    cl5 m = clutchIn 5 m . (# orbit 4)
+    cl6 m = clutchIn 6 m . (# orbit 5)
+    cl7 m = clutchIn 7 m . (# orbit 6)
+
+    selPF = select
+    selPI = squeeze
+    selFF = selectF
+    selFI = pickF
 :}
 
 :{

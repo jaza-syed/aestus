@@ -1,0 +1,6 @@
+jm1 2 $ (|* gain 0.7) $
+  drumM "rolandtr909" [
+    fix  (# cut 1) (s "oh") $
+    fix  (# cut 1) (s "hh") $
+    fast 3 $ s "{bd cp hh, oh sd*2, ~cp ~hh ~sd rim*2, oh ~ hh [cp rim] [bd rim]}" # n 1
+  ]

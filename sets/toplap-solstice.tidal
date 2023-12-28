@@ -1,0 +1,35 @@
+do
+  jm1 4 $ silence
+  jm2 4 $ silence
+  jm3 4 $ silence
+  jm4 4 $ silence
+  jm5 4 $ silence
+jm1 2 $ (|* gain 0.7) $
+  drumM "rolandtr909" [
+    s "bd" # n 1
+  ]
+
+jm2 2 $ (|* gain 0.7) $
+  drumM "rolandtr808" [
+    s "perc"
+  ]
+
+jm3 2 $ (|* gain 0.7) $
+  n "0" # s "plaits" # engine 2 # morph 0.5 # timbre 0.5 # harm 0.5
+  # level 0.9 # lpg 0.5 0.5 # mode 0 # octave 3
+
+jm4 2 $ (|* gain 0.7) $
+  n "5" # s "supergong" # voice 0.5 # decay 0.2 # accelerate 0 # octave 2
+  # verbwet 0.1 # verbtime 0.1 # verbdamp 0.2 # verbhp 0.2 # verbfreeze 0 # verbdiff 1
+  |* gain 0.7
+
+-- samples
+jm5 2 $ (|* gain 0.7) $
+  n "0" # s "rave"
+
+do
+  jm1 4 $ silence
+  jm2 4 $ silence
+  jm3 4 $ silence
+  jm4 4 $ silence
+  jm5 4 $ silence

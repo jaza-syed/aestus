@@ -1,6 +1,8 @@
-- learn random
 - Controlling tidal with a MIDI controller
-- Hooking up tidal to ableton for recording
+- Build live mixer + visualizer with max
 - Creating synths with `SuperDirt` +  ugens
-- Install mi-ugens https://tidalcycles.org/docs/reference/mi-ugens-installation/
-- Install tidal drum machines https://github.com/ritchse/tidal-drum-machine
+- Move to vim / emacs
+
+# Questions for discord
+- How can i start a transition on a mod cycle boundary?
+-

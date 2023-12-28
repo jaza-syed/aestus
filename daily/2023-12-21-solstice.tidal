@@ -1,0 +1,37 @@
+-- bd cp sd hh/oh
+jm1 2 $ (|* gain 0.4) $
+  drumM "rolandtr909" [
+    every 4 (silent) $ fast 2 $ s "bd(<3 5 3 5>,8)" # n 1,
+    juxBy (slow 4 sine) rev $ every 6 (silent) $ every 4 (# waveloss "<25 50 75>") $
+      ghost $ fast 2 $ s "cp(<5 3>, 8, 2)" # n 1 # (speed $ slow 4 $ range 0.8 1.2 sine),
+    s "hh oh hh hh . hh hh hh hh . oh hh oh hh . hh!4" # cut 2
+  ]
+  # verbgain 1.0 # verbwet 0.1 # verbtime 0.2 # verbdamp 0.2 # verbhp 0.2
+  # verbfreeze 0 # verbdiff 0.1
+
+-- perc, cb
+jm2 2 $ silent $ (|* gain 0.7) $
+  slow 4 $ drumM "rolandtr808" [
+   echo 3 0.75 0.5 $ fast 2 $ s "perc(5,8)" # n (irand 8)
+  ]
+  hush
+
+jm3 2 $ (|* gain 0.6) $
+  ghost $
+  every 3 (off 0.25 (+ n (-7))) $
+  every 4 (off 0.5 (+ n 5)) $
+  fast 2 $ n (scale "<lydian phrygian>" (segment 8 $ irand 10))
+  # s "plaits" # engine 2 # morph (slow 6 saw) # timbre 0.5 # harm (slow 8 sine)
+  # level 0.9 # lpg 0.5 0.5 # mode 0 # octave 3
+
+jm4 2 $ (|* gain 0.5) $ silent $
+  ghost $ n "3@6 _ 4@5" # s "supergong" # voice 1 # decay 0.6 # accelerate 0 # octave 2
+
+jm5 2 $ (|* gain 0.7) $ every 4 (# waveloss 20) $
+  timeLoop 8 $ rotL 16 $ ghost $ fast 4 $ randslice 4 $ n "1 2 3 4" # s "rave" # cut 1
+
+jm1 2 $ silence
+jm2 2 $ silence
+jm3 2 $ silence
+jm4 2 $ silence
+jm5 2 $ silence

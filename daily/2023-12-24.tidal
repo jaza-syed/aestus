@@ -1,0 +1,5 @@
+d1 $ stack [
+  (selectF (segment 1 $ irand 2) [brak, echo 3 0.25 0.75])
+     $ fast 2 $ s "cp(3,8)",
+  s "bd/2"
+  ]

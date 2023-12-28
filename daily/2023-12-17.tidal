@@ -1,0 +1,47 @@
+-- use repeatCycles instead of timeloop hack
+jumpMod 1 4 $ fast 2 $ stack [every 3 (# squiz 1.2)
+  $ echo 3 0.25 0.75 $ every 4 silent $
+  rev $ smash' 3 [2,3] $ n "0 1 [2, ~] 3 [4,~] 5 6" # s "rave" # lpf 2000,
+  rotL 1.5 $ brak $ inside 4 rev $ n "<[0 3 ~ ~] [~ [1 2|4] 5]> " # s "hoover" # gain 0.9
+  ] # gain 0.5 # orbit 0  # cut 1
+
+jumpMod 2 2 $ echo 3 0.125 0.75
+  $ n "1*4" # s "clubkick" # orbit 1 # gain 0.5
+
+
+d3 $ jux rev $ every 4 (+ n 1) $ palindrome $ ghost $ n (scale"ritusen" ("1@6 ~@1 2@5")) # octave 4
+  # s "plaits" # engine 2
+  # morph 0
+  # harm 0.5
+  # timbre (range 0 0.4 $ slow 8 saw)
+  # morph 1
+  # mode 1
+  # gain 0.7
+
+  hush
+
+d3 $ s "cp*16" # cut 1
+
+d3 $ drumM "rolandtr808" [
+   someCyclesBy 0.5 (# squiz 1.2) $ jux (rev . rotL 4) $ fast 2 $ struct "t(5,8)" "perc"
+    # n (timeLoop 4 $ rotR 16$ segment 8 $ irand 10)
+] # gain 0.55 # verb 0.9 0.9 0.9 0.7
+
+d3 $ drumM "rolandtr909 " [
+   fix (# cut 1) (s "bd") $ outside 2 (every 2 $ echo 3 0.125 0.75) $ palindrome $ s "{bd bd?, ~ [~ cp] ~}" # n 1
+] # gain 0.7
+
+
+  hush
+
+d2 $ silence
+
+d3 $ drumM "rolandtr909" [
+  every' 6 2 silent $ s "<[bd ~bd bd ~] [bd bd ~bd ~]>" # n 1 # cut 1
+--  juxBy 0.4 (rev . fast 2) $ s "cp(3,8,2)" # speed (range 0.8 1.2 $ slow 4 sine) # n 1 # cut 1,
+]
+  # verb (slow 3 (range 0.1 0.2 saw)) 0.1 0.2 0.2 # gain 0.7
+
+
+
+hush

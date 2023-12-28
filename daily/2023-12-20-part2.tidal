@@ -1,0 +1,37 @@
+jm1 1 $ drumM "rolandtr909" [
+  iter 4 $ fast 2 $ s "bd(<3 5 3 5 6 8>,8)" # n 1 # gain 0.9,
+  juxBy 0.3 rev $ slow 2 $ s "cp(3,8) . ~cp ~ cp . cp(3,8) . cp(5,8)" # gain 0.8
+]
+|* gain 0.7
+
+jm2 1 $ drumM "rolandtr808" [
+  jux rev $ ghost $ fast 2 $ s "perc(5,8)" # timeLoop 8 (n (irand 5)) # pan (slow 4 sine) # gain 1.0 # speed 0.5
+]
+|* gain 0.7
+
+-- "bass"
+jm3 1 $
+superimpose (+ n 12) $
+ every 4 (off 0.25 (+ n 5))
+  $ n "0 0 0 0 0 1 0 1 . 0 0 0 1 0 0 2 5" # s "plaits" # engine 2 # morph 0.5 # timbre 0.5 # harm 0.5
+  # level 0.9 # lpg 0.5 0.5 # mode 0 # octave 3
+  |* gain 0.8
+
+-- "lead"
+jm4 1 $ n "5 ~5" # s "supergong" # voice 0.5 # decay 0.2 # accelerate 0 # octave 2
+  # verbwet 0.1 # verbtime 0.1 # verbdamp 0.2 # verbhp 0.2 # verbfreeze 0 # verbdiff 1
+  |* gain 0.7
+
+-- samples
+jm5 1 $ ghost $ timeLoop 1 $ rotL 7.5 $ fast 4 $ randslice 4 $ n "~2 4 0"
+# s "rave"  # begin (slow 16 $ range 0 0.5 sine) # end (slow 16 $ range 0.75 1 sine) # cut 1
+  |* gain 0.7
+
+once $ s "tablex:2"
+
+do
+  jm1 4 $ silence
+  jm2 4 $ silence
+  jm3 4 $ silence
+  jm4 4 $ silence
+  jm5 4 $ silence

@@ -1,0 +1,59 @@
+jm1 2 $ drumM "rolandtr909" [
+  iter 4 $ fast 2 $ s "bd(<3 5 3 6>, 8)" # n 1,
+  every 4 (# waveloss "<25 50 75>") $ ghost $ every 2 (fast 2) $ s "cp(5, 8, 2)" # (speed $ slow 4 $ range 0.8 1.2 sine)
+]
+|* gain 0.7
+
+jm2 2 $ ghost $
+  fast 2 $ timeLoop 0.25 $ rotL 4 $ fast 4 $ randslice 4 $ n "1 2" # s "rave" # cut 1
+  |* gain 0.7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+jm2 1 $ drumM "rolandtr808" [
+  s "perc" # n 0
+] |* gain 0.7
+
+jm2 3 $ every 4 (off 0.5 (+ n 5)) $ ghost $ n "0 _ ~1 0" # s "plaits" # octave 3  # engine 2
+  # morph 0.5 # timbre (slow 3 sine) # harm 0.5 # level 0.9 # lpg 0.5 0.5 # mode 0
+  |* gain 0.7
+
+jm4 1 $ fast 2 $
+every 2  (off 0.125 (+ n 12) ) $
+every 1 (jux rev)
+$ n (scale "<aeolian lydian>" "0 0 1 0 0 0 0 2") # s "supergong" # octave 3
+  |* gain 0.7 # verb 0.2 0.2 0.2 0.2
+hush
+jm6 1 $ s "hoover"
+  |* gain 0.1
+
+
+do
+  jm1 4 $ silence
+  jm2 4 $ silence
+  jm3 4 $ silence
+  jm4 4 $ silence
+  jm5 4 $ silence
+  jm6 4 $ silence

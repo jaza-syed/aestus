@@ -1,6 +1,6 @@
 d1 $ fast 2 $
   stack [
-    sound "cp(<3 5>, 8)" # speed sine + 2.0,
+    sound "cp(<3 5>, 8)" # speed sine + 2.0 # cut 1,
     rotR 0.125 $ euclidInv "<3 5>" 8 $ s "future",
-    every 8 (fast 3) $ s "[~hh]*4"
+    fast 2 $ iter 4 $ s "hh hh oh hh" # cut 2
   ]

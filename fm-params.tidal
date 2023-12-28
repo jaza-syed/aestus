@@ -32,4 +32,5 @@
     -- between steps.  Low numbers are slow, high numbers are fast.
     fmegrate :: Int -> Int -> Pattern Double -> ControlPattern
     fmegrate op step = pF ("egrate" ++ show op ++ show step)
+
 :}

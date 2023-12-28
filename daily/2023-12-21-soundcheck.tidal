@@ -1,0 +1,30 @@
+jm1 2 $ (|* gain 0.7) $
+  drumM "rolandtr909" [
+    ghost $ every 4 (degradeBy 0.5) $ fast 2 $ s "cp(<3 5>,8, <0 2>)" # speed (range 0.8 1.2 (slow 16 sine))
+  ]
+
+jm2 2 $ (|* gain 0.6)) $
+  drumM "rolandtr808" [
+    every 4 (off 0.5 ((# speed 1 ). (|* gain 0.5))) $
+     jux rev $ ghost $ fast 2 $ s "perc(5,8)" # timeLoop 8 (n (irand 5)) # pan (slow 4 sine) # speed 0.5
+  ]
+
+jm3 2 $ (|* gain 0.7) $
+  $ n "0" # s "plaits" # engine 2 # morph 0.5 # timbre 0.5 # harm 0.5
+  # level 0.9 # lpg 0.5 0.5 # mode 0 # octave 3
+
+jm4 2 $ (|* gain 0.7) $
+  n "4" # s "supergong" # voice 1.0 # decay 0.2 # accelerate 0 # octave 2
+  # verbwet 0.1 # verbtime 0.1 # verbdamp 0.2 # verbhp 0.2 # verbfreeze 0 # verbdiff 1
+  |* gain 0.7
+
+jm5 2 $ (|* gain 0.7) $
+  ghost $ fast 4 $ randslice 4 $ n "4 0 ~2" # s "rave" # cut 1
+
+-- COOL
+jm1 2 $ (|* gain 0.7) $
+  drumM "rolandtr909" [
+    fix  (# cut 1) (s "oh") $
+    fix  (# cut 1) (s "hh") $
+    fast 3 $ s "{bd cp hh, oh sd*2, ~cp ~hh ~sd rim*2}" # n 1
+  ]

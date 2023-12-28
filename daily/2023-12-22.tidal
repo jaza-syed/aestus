@@ -1,0 +1,17 @@
+-- bus utilities
+makeBus name busId pat = pF name pat # pI ("^" ++ name) busId
+makeRecv name busId = pI ("^ ++ name") busId
+--
+morphbus = makeBus "morph"
+morphrecv = makeRecv "morph"
+harmbus = makeBus "harm"
+harmrecv = makeRecv "harm"
+timbrebus = makeBus "timbre"
+timbrerecv = makeRecv "timbre"
+
+d1 $ echoWith 2 (1/4) ((+ n 12) . (|* gain 0.9)) $ "plaits" # n 1
+# engine 2 # morphbus 1 (slow 2 $ range 0.1 0.9 saw)
+# timbrerecv 1
+# sustain 6 # octave 3
+
+hush

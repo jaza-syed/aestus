@@ -1,0 +1,32 @@
+jumpMod 1 4 $ (# orbit 0)
+$ drumM "rolandtr909" [
+every 3 (fast 2) $ s "bd(<3 3 3 5>,8)" # n 2 |* gain 1
+, every 4 (ghost . degradeBy 0.5) $ fast 2 $ iter 4 $ s "cp(5,8)"
+ |* speed (range 0.8 1.2 $ slow 4 sine ) |* gain 0.9
+, ghost $ s (struct "t t . ~ t t . t t . t t t" "rim:1 rim:2") # gain 1.2 # gain 0.7 # n (slow 4 $ run 5)
+]
+* gain 0.85
+
+d3 $ drumM "rolandtr808"
+[ghost $ every 3 (fast 2) $ (s "perc(<3 3 3 5>,8)" # (n $ tl 4 $ irand 9))]
+* gain 0.8 # orbit 2  # pan (slow 2 sine)
+
+jumpMod 2 4 $ (# orbit 1) $
+every 9 silent $ outside 3 (every 4 $ (jux rev)) $
+every 3 (ghostWith 0.33 ((# octave 3) . (|* gain 0.8))) $
+every 4 (off 0.5 id) $
+palindrome $
+fast 2 $
+s "plaits" # engine 2
+  >| n (scale "<lydian dorian phrygian>" "0 0 0 2 0 0 2 5")
+  # octave 2
+  # morph (slow 8 $ range 0.5 0.8 saw)
+  # timbre 0.5 --
+  # harm (slow 8 $ range 0.5 0.8 saw)
+  # level 0.9 # lpg 0.5 0.5 # mode 0
+  # verb 0.1 0.2 0.2 0.2
+  # gain 0.7
+
+  scaleList
+
+hush

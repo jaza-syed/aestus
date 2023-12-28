@@ -1,0 +1,16 @@
+jm1 2 $ timeLoop 100 $ drumM "rolandtr909" [
+iter 4 $ s "bd sd?0.8 [bd? bd?] [sd sd?]" # n 1 # squiz 1.1
+, spin 4 $ someCycles (ghost . (|* gain 0.8)) $ fast 2 $ s "cp(3,8)" # speed (slow 8 $ range 0.8 1.2 sine) # waveloss 0.5
+, fast 2 $ s "hh hh . oh hh  . oh hh  . hh hh " # cut 1 # gain 0.9
+] |* gain 0.7
+
+jm2 2 $ drumM "rolandtr808" [
+   --every 6 (fast 1) $ every 4 (slow 2) $ every 8 silent $ ghost $ fast 2
+   -- $ jux rev $ "perc(5,8)" # n (timeLoop 2 $ irand 8) # gain 0.8
+    -- # verb 0.1 0.1 0.2 0.2,
+  fast 2 $ iter 8 $ s "cb(3,8)" # gain 1.5 # pan (slow 4 sine) # cut 1
+] |* gain 0.7
+
+jm3 1 $ every 4 (off 0.5 (fast 2 . rev) )$ ghost $ (fast 2 $ (s "plaits" <| n (scale "<aoelian lydian>" "1 1 ~ 1"))
+  # octave 2 # morph 0.5 # timbre 0.5 # legato (range 0.8 1.5 saw))
+  |* gain 0.8

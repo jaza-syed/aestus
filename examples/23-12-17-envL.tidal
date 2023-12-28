@@ -1,0 +1,14 @@
+-- need to use qt to get the envL -
+wait 1 1 $ stack [
+  layer [(0.0125 <~).(# pan (slow 12 $ sine + 0.5)), ((# pan (slow 12 $ sine * 4)))]
+    $ s "click*16" # legato 1 # speed (range 0.99 1.33 $ slow 12 envL)
+  --repeatCycles 4 $ struct (binaryN 16 55055) $ s "<bd clubkick>" # gain "<1.33 0.91>" # speed "<1 0.88>" ,
+  --repeatCycles 4 $ trunc (0.55) $ struct ((inv)(binaryN 16 55055)) $ s "cp" # speed "<0.66 0.88>",
+  --(0.122 <~) $ repeatCycles 16 $ struct "<t*4 f>" $ s "linnhats" # coarse 3 ,
+  --repeatCycles 8 $ (0.111 <~) $ struct "t(3,8,2)" $ note "<ef2 e2>" # s "monsterb" # legato 0.66 # waveloss 33 , 
+  --repeatCycles 24 $ off "0.0125 0.00625" (# speed (range 0.97 1.11 $ slow 12 sine))
+   -- $ struct "t(4,10)" $ note "[g6 g7]" # s "moog" # legato (range 0.11 0.33 $ slow 36 sine) # gain 0.79 ,
+--  slow 24 $ n (run 16) # s "diphone" # legato 1 # waveloss 22 # speed 0.88 # gain 1.22
+]
+
+hush
