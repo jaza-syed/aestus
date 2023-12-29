@@ -1,0 +1,7 @@
+d1
+  $ outside 4 ((every 4 $ iter 4) . (every' 4 1 $ degradeBy 0.5))
+  $ fast 2
+  $ s (euclidFull "<3 5 5 3>" "8" "bd" "cp:1")
+  # verbgain 1 # verbwet 0.9 # verbdamp 0.1
+  # verbhp (timeLoop 4 $ segment 4 perlin)
+  # verbfreeze 0 # verbdiff 1
