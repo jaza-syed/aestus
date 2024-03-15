@@ -1,0 +1,4 @@
+d1 $ drumM "rolandtr909" $ [
+  somecycles (within (0.75, 1) (fast 2) )
+   $ s "bd:1(5,8)" # gain (repeatCycles 2 $ range 0.9 1 rand)
+  ]

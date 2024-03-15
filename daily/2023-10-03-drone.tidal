@@ -1,0 +1,5 @@
+hush
+d1 $ off (0.25) (+12) $ slow "1 2" $ sound "superwavemechanics" <| n "<0 1 2>" # octave 2
+  # detune "<0 0.1 0.2 0.3 0.4>" # voice 0.5 -- synth
+  # delay 0.8 # delayfb 0.8 # delaytime "<0.25 0.5 0.75>" # lock 1 -- delay
+  # triode "<0 0.5 0 1 0 1.5>"

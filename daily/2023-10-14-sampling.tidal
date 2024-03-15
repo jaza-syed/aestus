@@ -6,7 +6,6 @@ d1 $ echo 4 (-0.2) 0.5 $ every 2 (inside "<2 4>" rev) $ hurry 4 $ splice 8 "<0*1
 -- striate: interlace samples. split each sample into n parts
 -- then play the loop n times playing the i'th part of each sample on loop i from 1 to n
 -- with fast n applied so that the loop results in the same length
--- TODO: Exercise: implement striate in terms of begin/end, fast etc
 
 
 

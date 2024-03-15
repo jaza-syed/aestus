@@ -1,0 +1,5 @@
+-- path: '/Users/jsyed/Music/SuperCollider Recordings/SC_240127_194437.aiff'
+d1 $ every 4 (fast 2 . degradeBy 0.25)
+  $ fix (# pan 0.5) (s "bd") $ spin 4 $ echo 3 0.33 0.75
+  $ drumM "rolandtr909" [ "bd:1" # legato 1 , "[hh:3|oh:3]" # cut 1]
+

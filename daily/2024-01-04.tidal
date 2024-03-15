@@ -1,0 +1,17 @@
+
+do
+  setcps (150/60/4)
+  d1
+    $ (|* gain 0.8)
+    $ drumM "rolandtr909" [
+          ghost' (1/4) $ struct "~ . ~ t . [ ~ t ] ~ . [t t] " (s "sd:2")
+           # n "0 . 0 . <0 0 1> . <0 0 1 2>" # legato 1 # gain 0.9
+          , (# (nudge "0 0 -0.01 0.01")) $ iter 4 $ fast 4 $ iter 4
+            $ struct "t t ~ t" (s "hh") # cut 1 # gain "1 0.95 0.8 0.8"
+            # hpf (rangex 500 5000 $ slow 4 perlin)
+          , struct "~ ~ ~ t" (s "oh:3") # cut 1 # gain "<1 0.95 0.8 0.8>"
+    ]
+    # verb 0.1 0.1 0.8 0.8
+  d2 $ drumM "rolandtr909" [
+          pressBy "<0 0.01 0 0 0 0.02>"  $ struct "t?0.2" (s "bd:1") # distort 0.05
+    ]

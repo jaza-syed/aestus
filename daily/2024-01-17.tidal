@@ -1,0 +1,13 @@
+setcps (140/4/60)
+
+d1 $ (|* gain 0.9) $
+  drumM "rolandtr909"  [
+  ghost' (1/4) $ struct "t(<5 5 5 3>, 16)" (s "bd")
+  # gain "1 0.95 0.95 0.9" # n (repeatCycles 2 $ rotL 2 $ irand 8)
+  # legato (slow 1.3 $ range 1 2 sine)
+  # nudge (iter 4 $ "0.01 0.00 0.01 0.01" / 3)
+  , ghost $ struct "t(<5 5 5 3>, 16, <1 1 2 2 3 3 4 4>)" (s "hh")
+   # gain "0.95 0.95 0.95 1" # n (repeatCycles 2 $ irand 8) # legato 1.5
+    # nudge (iter 4 $ "0 0.01 0.02 0.01" / 2)
+]
+  # verb 0.1 0.1 0.8 0.8

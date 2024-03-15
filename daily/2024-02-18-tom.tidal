@@ -1,0 +1,32 @@
+-- setcps (170/60/4)
+-- d1 $ "bd bd . {sn sn, bin:0 bin:1 bin:0} . hh hh hh hh . ho"
+-- d1 $ "{sn sn, bd hh oh}"
+d1 $ "clubkick" <| n "1 2 1 1" # gain 1.2 # room 0.1
+-- d2 $ "<casio:2 ~>" # room 0.5 # hpf 1000
+d4 $ slow 2 $ "sax" <| n "<4 3 2 1> <[4 3] 9>" # gain "0.8 1.2 1.5 0.6" # legato 1
+d5 $ echo 3 "<0.25 0.33>" 0.9 $ "[rave2:1 rave2:1] [~ rave:2]"
+d3 $ fast 3 $ "bubble" <| n "[1 2] 3 4" # gain 1.5
+d5 $ "[rave2:1 rave2:1] [~ rave:2]"
+d4 $ ghost' 0.33 $ slow 0.9 $ "[rave2:1 rave2:1] [~ rave:2]"
+d5 $ ghost $ "[rave2:1 rave2:1] [~ rave:2]" # room 0.1 # gain 0
+d6 $ "rave2:2 [rave2:4 ~ rave:2]"
+
+
+d2 $ "clubkick" <| n "[2 2 ~ 1, 4 [5 2] 6]" # gain 0.2 # room 0.1 # room 2
+d1 $ ghost $ jux (fast 3) $ fast 1.7 $ "<rave2:1 rave:2> <rave:2>" # gain 0.2 # octer 1 # room 2
+d4 $ ghost $ fast 30 $ "sax" <| n "<4 2 3, [4 2]> <[3 1], 2>" # legato 1 # gain 1.1
+hush
+:t octer
+
+
+
+-- ghost ; echo num interval gain; fast num; slow num; jux rev;
+
+solo 5
+
+
+
+
+-- drawLine $ "{sn sn, bd hh oh}"
+
+-- d1 $ "<bd hh> <sn ho>" # squiz 2

@@ -1,0 +1,9 @@
+do
+  let rtm = "t t [t!3]@5 [t!5]@3 t [t!4]@3 t"
+  let lfo = perlin
+  d1 $ drumM "rolandtr909" [
+      slow 2 $ struct rtm $ s "{cp:1 cp:2 cp:3}%12" # cut 1
+      # hpf (rotL 2 $ slow 4 $ rangex 200 3000 lfo)
+      , bite 6 "<0 1> [<6 4> <2 3>] [~ <5 1>] 0" $ struct rtm $ s "<bd:1 bd:5>"
+        # cut 2 # lpf (slow 4 $ rangex 200 400 lfo)
+    ]

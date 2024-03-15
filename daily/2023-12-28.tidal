@@ -1,5 +1,7 @@
+hush
+
 d1
-  $ every 4 (degradeBy 0.75)
+  $ every 4 (degradeBy 0.25)
   $ fix ((|* speed 0.25) . rotL 4) (s "bev")
   $ juxBy (range 0.25 0.75 $ slow 4 sine) (rotL 4 . (inside 2 rev))
   $ splice 8 "{<0 0 0 3 0 0 5 7>(<3 3 5 0 0 6>, 8), [<1 5!3 ~ 6!4> . 2 . [~ 3]], <7 4>(<3 5>, 16, 2)}"
@@ -9,3 +11,6 @@ d1
   # verb 0.1 0.1 0.2 0.8
   # cps (segment 64 $ range (135/240) (137/240) perlin)
   # gain 0.75
+
+  hush
+  d1 $ s "bd sn"

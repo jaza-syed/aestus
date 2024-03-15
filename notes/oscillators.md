@@ -10,4 +10,4 @@ any structure, so Tidal will simply trigger events at a fixed rate
 left, so eight kick drums will play, with pan values sampled from the sine wave
 for each of the eight events.
 
-- scaling operators `range x y <op>` qa
+- scaling operators `range x y <op>`

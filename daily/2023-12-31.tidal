@@ -1,0 +1,13 @@
+import qualified Data.Map as Map
+hush
+d1
+   $ fixRange (# cut 1) (pure $ Map.singleton "note" ((VN (-36), VN 15)))
+   $ juxBy 0.3 (rev . rotR (1/16))
+   $ (off (1/16) (+ note "<7 12 5 19>"))
+   $ (off "<3s 5s 5/32 7/32 5s 3/32>" (+ note "<5 19 7 12>"))
+   $ struct "t(<3 5 7 9>,<8 8 16 16>)"
+   $ note (scale "minor" $ floor <$> (slow 2 $ (slow 2 saw + slow 3 cosine) * "<[6 -3] [5 -4]>"))
+   # s "bass3:8"
+   # fadeTime 0.05
+   # gain 0.88
+   # legato 2

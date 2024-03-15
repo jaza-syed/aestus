@@ -47,11 +47,3 @@ hush
 -- any function can be turned into a wet-dry with layer
 layerWet fn wet = layer [(# gain wet), fn . (# gain (1.0-wet))]
 d1 $ swingBy (1/3) 3 $ sound "hh*8"
-
-
-hush
--- TODO: struct/mask/sew/stictch
--- TODO: timescale
--- TODO: https://club.tidalcycles.org/t/sharing-custom-functions/1032/4
--- TODO: https://github.com/ghalestrilo/libtidal
--- TODO: more investigations on tonality need some functions for manipulating melody

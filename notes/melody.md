@@ -37,3 +37,5 @@ list of not numbers once the first argument (note list) has been applied
 
 # chord syntax
 - `<tonic>'<type>['<num>]` - num specifiies the number of notes
+- Chords can be patterned independently of notes using normal pattern combination functions with pattern strings!
+  Example: `d1 $ n ("c e f" |+ "<'maj 'min>") # s "supermandolin"` !!
