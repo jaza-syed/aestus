@@ -4,8 +4,8 @@
 d1 $ "clubkick" <| n "1 2 1 1" # gain 1.2 # room 0.1
 -- d2 $ "<casio:2 ~>" # room 0.5 # hpf 1000
 d4 $ slow 2 $ "sax" <| n "<4 3 2 1> <[4 3] 9>" # gain "0.8 1.2 1.5 0.6" # legato 1
+hush
 d5 $ echo 3 "<0.25 0.33>" 0.9 $ "[rave2:1 rave2:1] [~ rave:2]"
-d3 $ fast 3 $ "bubble" <| n "[1 2] 3 4" # gain 1.5
 d5 $ "[rave2:1 rave2:1] [~ rave:2]"
 d4 $ ghost' 0.33 $ slow 0.9 $ "[rave2:1 rave2:1] [~ rave:2]"
 d5 $ ghost $ "[rave2:1 rave2:1] [~ rave:2]" # room 0.1 # gain 0

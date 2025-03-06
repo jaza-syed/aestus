@@ -1,0 +1,5 @@
+d1 $ s "bd sn"
+
+drawLine $ "{a b, c d e}"
+drawLine $ "a(3, 8)"
+drawLine $ "a(5, 8)"

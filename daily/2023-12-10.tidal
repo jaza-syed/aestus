@@ -4,3 +4,5 @@ d1 $ fast 2 $
     rotR 0.125 $ euclidInv "<3 5>" 8 $ s "future",
     fast 2 $ iter 4 $ s "hh hh oh hh" # cut 2
   ]
+
+  hush

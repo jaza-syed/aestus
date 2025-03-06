@@ -16,6 +16,9 @@ jm2 2 $ silent $ (|* gain 0.7) $
   ]
   hush
 
+d1 $ s "bd sn"
+drawLine $ ghost "a b c d"
+
 jm3 2 $ (|* gain 0.6) $
   ghost $
   every 3 (off 0.25 (+ n (-7))) $

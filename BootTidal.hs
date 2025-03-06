@@ -99,6 +99,17 @@ let only = (hush >>)
     selPI = squeeze
     selFF = selectF
     selFI = pickF
+
+    degree = pF "degree"
+    ctranspose = pF "ctranspose"
+    mtranspose = pF "mtranspose"
+    gtranspose = pF "gtranspose"
+    harmonic = pF "harmonic"
+    etune = pF "detune"
+    scalename = pS "scaleName"
+    tuning = pS "tuningName"
+    stepsPerOctave = pI "stepsPerOctave"
+    octaveRatio = pF "octaveRatio"
 :}
 
 :{
@@ -113,8 +124,8 @@ let getState = streamGet tidal
 :set prompt "tidal> "
 :set prompt-cont ""
 
-:script "~/tidal/aestus/fm-params.tidal"
-:script "~/tidal/aestus/mi-ugens-params.tidal"
-:script "~/tidal/aestus/tdm.tidal"
+:script "fm-params.tidal"
+:script "mi-ugens-params.tidal"
+:script "tdm.tidal"
 
 default (Pattern String, Integer, Double)

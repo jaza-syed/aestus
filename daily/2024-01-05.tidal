@@ -1,6 +1,5 @@
 screw l c p = loopAt l $ chop c $ p
 
-
 d1 $ juxBy 0.1 (rotL (1/16) . rev . (slow 2) . (# ring 0.3 ) . (# ringf 880))
    $ bite 8 (every 4 (+ 2) $ "[[0 1 <2 3> 3], [~4 ~<5 7> ~6 ~7 ]]")
    $ loopAt 16 $ chop 64 $ s "bev"

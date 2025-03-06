@@ -1,0 +1,70 @@
+-- jm* - jump
+-- xf*  - crossfade
+-- in*  - interpolate - morph control values
+-- cl*  - cross-degrade
+
+-- plan?
+-- 1 - clutch 2 - clutch 3 - add bev - sinusoidal degrade with 1 - remove bev - sinusoidal degrade with 2
+-- timeloop all and fade out
+hush
+
+   -- $ outside 4 (every 4 rev)
+
+-- interpolateIn 0 16  
+jumpMod 1 8 
+  $ degradeBy (slow 24 sine)
+   -- $ rotL 2 $ timeLoop 0.5
+   $ degradeBy 0
+   -- $ juxBy 0.3 (rev . degradeBy (slow 4 sine) . repeatCycles 4)
+   -- $ every 6 (rotL 0.25)
+   -- $ every' 8 2 rev
+   $ every 4 ((|* speed 0.75) . ply "1 [2|3]")
+   $ slice 16 ("0 . 1 ~ . [2 ~] 6 . <4 5> . 1 <8 0> " + 4)
+   $ loopAt 6
+   $ s "breaks130"
+   # legato (range 1 1.5 $ slow 4 perlin)
+   # verb (range 0.1 0.3 $ slow 8 perlin) 0.5 0.8 0.1 
+   # gain 0.45
+
+screw l c p = loopAt l $ chop c $ p
+
+hush
+
+   -- $ degradeBy (rotL 8 $ slow 24 sine)
+
+all $ jux rev
+
+   clutchIn 0 32 silence
+   clutchIn 1 32 silence
+   hush
+
+
+jumpMod 0 1
+-- clutchIn 0 32 
+   $ someCyclesBy 0.25 (fast 2)
+   $ juxBy 0.1 (rotL (1/16) . rev . (slow 2) . (# ring 0.3 ) . (# ringf 880))
+   $ bite 8 (every 4 (+ 2) $ "[[0 1 <0 3> 3], [~4 ~<5 2> ~6 ~7 ]]")
+   $ loopAt 16 $ chop 64 $ s "bev"
+   # delay 0.5 # delayt 0.33 # delayfb (range 0.5 0.7 $ slow 4.25 sine) # lock 1
+   # legato (slow 8 $ range 0.5 1.5 sine)
+   # verb 0.1 0.1 0.8 0.8
+   # verbfreeze 1
+   # gain 0.5
+
+--   $ s "[bev, fm:5]"
+hush
+
+jumpMod 0 8
+  $ degradeBy (rotL 16 $ slow 24 sine)
+  $ every 4 (degradeBy 0.25)
+  $ fix ((|* speed 0.25) . rotL 4) (s "bev")
+  $ juxBy (range 0.25 0.75 $ slow 4 sine) (rotL 4 . (inside 2 rev))
+  $ splice 8 "{<0 0 0 3 0 0 5 7>(<3 3 5 0 0 6>, 8), [<1 5!3 ~ 6!4> . 2 . [~ 3]], <7 4>(<3 5>, 16, 2)}"
+  $ loopAt 1
+  $ s "[fm:5]"
+  # legato (slow 2 $ range 1 2 saw)
+  # verb 0.1 0.1 0.2 0.8
+  # cps (segment 64 $ range (135/240) (137/240) perlin)
+  # gain 0.33
+
+  hush

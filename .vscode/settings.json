@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.tidal": "haskell"
+    },
+    "tidalcycles.bootTidalPath" : "/Users/jsyed/prod/aestus/BootTidal.hs"
+}

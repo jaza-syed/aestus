@@ -1,13 +1,14 @@
 setcps (170/240)
 
 d1
-   $ juxBy 0.3 (rev . degradeBy 0.5 . repeatCycles 4)
+   $ juxBy 0.3 (rev . degradeBy (slow 4 sine) . repeatCycles 4)
    $ every 6 (rotL 0.25)
    $ every 4 ((|* speed 0.75) . ply "1 [2|3]")
    $ slice 16 ("0 . 1 ~ . [2 ~] 6 . <4 5> . 1 <8 0> " + 4)
    $ loopAt 6
    $ s "breaks130"
    # legato (range 1 1.5 $ slow 4 perlin)
+
 
 -- functions to use?
 _add :: Time -> Pattern a -> Pattern a -> Pattern a

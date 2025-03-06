@@ -1,0 +1,24 @@
+/*
+
+d1 $ slow 2 $ s "gabor*8" # n "0 1 2 3 4 5 6 7 8 9" # octave "4" # mtranspose "{0 1}/8" # scalename "locrianMajor"
+
+-- tunings, very subtle differences
+
+d1 $ slow 2 $ s "gabor*8" # degree "0 1 2 3 4 5 6 7" # scalename "cmajor"
+d1 $ slow 2 $ s "gabor*8" # n "0.5 1 2 3 4 5 6 7" # scalename "ritusen"
+d1 $ slow 2 $ s "gabor*8" # n "0 1 2 3 4 5 6 7" # scalename "ritusen" # tuning "young"
+d1 $ slow 2 $ s "gabor*8" # n "0 1 2 3 4 5 6 7" # scalename "ritusen" # tuning "just"
+hush
+
+d1 $ slow 2 $ s "gabor*10" # degree "0 " # scalename "chromatic" # stepsPerOctave 10
+
+
+-- star
+d1 $ slow 2 $ s "gabor*8"
+
+d1 $ slow 2 $ n "0 1 2 3 4 5 6 7" # s "gabor"
+d1 $ slow 2 $ note "0 1 2 3 4 5 6 7" # s "gabor" # scalename "ritusen"
+
+d1 $ slow 2 $ degree "0 1 2 3 4 5 6 7" # s "superpiano" # scalename "major" # gain 0.5 # harmonic 1
+d1 $ s "superpiano"
+hush
