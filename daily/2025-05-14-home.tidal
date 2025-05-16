@@ -1,7 +1,9 @@
-d1 $ fast 1.5 $ drumM "rolandtr808" [
+d2 $ fast 1.5 $ drumM "rolandtr808" [
   "{bd:3(3,8), cp [~[hh, ~rim] lt <oh rim*2>]}",
   jux rev $ degradeBy 0.2 $ "perc(5,8)" # n (irand 15) # pan (slow 2 sine)
 ]
+
+d3 $ silence
 
 d1 $ degradeBy 0 $ jux rev
    $ ghost $ splice 4 "0? 2? 1? 3?" $  jux rev $ s "birds" 
@@ -9,17 +11,32 @@ d1 $ degradeBy 0 $ jux rev
    # hpf (slow 16 $ rangex 40 16000 sine) 
    # speed (slow 8 $ range 0.125 0.25 sine)
 
-d1
-  $ outside 4 ((every 4 $ iter 4) . (every' 4 1 $ degradeBy 0.5))
-  $ fast 2
-  $ s (euclidFull "<3 5 5 3>" "8" "bd" "cp:1")
-  # verbgain 1 # verbwet 0.9 # verbdamp 0.1
-  # verbhp (timeLoop 4 $ segment 4 perlin)
-  # verbfreeze (iter 4 "0 1 0 [0 1]") # verbdiff 1
 
-d1 $ (|* gain 0.9) $
+--- section 1 :: ravey bit based on these parts
+
+d1 $ jux rev $ fast 2 $ struct "t(<3 5 3 6 3 1 3>, 8)" (s "rave") 
+  # n (timeLoop 4  $ irand 8) # legato (slow 16 $ range 1 2 perlin)
+
+d2 $ (* gain 1.1)
+  $ every 7 (mask "t t ~ ~ ~ ~ ~ t")
+  $ outside 4 ((every 4 $ iter 4) . (every' 4 1 $ degradeBy 0.5))
+  $ every 5 (fast 2)
+  $ every 10 (jux rev)
+  $ (# n (timeLoop 2 $ irand 4))
+  $ drumM "rolandtr909"
+  [
+    (euclidFull "<3 5 5 3>" "<8 16>" "[bd]" "cp:0") 
+  ]
+  # verb 0.1 0.1 0.8 0.8
+  -- # verbfreeze (slow 3 $ iter 4 "0 1 0 [0 1]") # verbdiff 1
+  -- # verbgain 1 # verbwet 0.9 # verbdamp 0.1
+  -- # verbhp (timeLoop 4 $ segment 4 perlin)
+  -- # verbfreeze (iter 4 "0 1 0 [0 1]") # verbdiff 1
+d3 $ (* gain 0.8) $
+  every 8 ((degradeBy 0.5). (jux rev)) $
   drumM "rolandtr909"  [
-  ghost' (1/4) $ struct "t(<5 5 5 3>, 16)" (s "bd")
+    -- fast 2 $ s "bd(<3 5 5 8 3 1>, 8)",
+  ghost' (1/4) $ struct "t(<5 5 5 3>, 16)" (s "sd:1")
   # gain "1 0.95 0.95 0.9" # n (repeatCycles 2 $ rotL 2 $ irand 8)
   # legato (slow 1.3 $ range 1 2 sine)
   # nudge (iter 4 $ "0.01 0.00 0.01 0.01" / 3)
@@ -27,24 +44,28 @@ d1 $ (|* gain 0.9) $
    # gain "0.95 0.95 0.95 1" # n (repeatCycles 2 $ irand 8) # legato 1.5
     # nudge (iter 4 $ "0 0.01 0.02 0.01" / 2)
 ]
-  # verb 0.1 0.1 0.8 0.8
+  # verb 0.1 0.2 0.8 0.8
+  -- # verbfreeze 1
 
-
-d1 $ drumM "rolandtr909" [
-  off 2.125 ((# s "bd") . (# pan 0.5) . (# n 4) . (# hpf 1 ). (# lpf 200)) $
-  off 1.25 ((# s "cp") . (# pan 0.3) . (# legato 3)) $
+d4 $ drumM "rolandtr909" [
+  every 9 (silent) $
+  off 2.125 ((# s "hh") . (# pan 0.5) . (# n 4) . (# hpf 1 ). (# lpf 10000) .(# cut 1)) $
+  off 1.25 ((# s "oh") . (# pan 0.3) . (# legato 3) . (# cut 1)) $
   echoWith 2 (1/4) ((|* gain 0.75) . (# hpf (slow 8 $ rangex 200 2000 perlin)))
   $ iter 4 $ fast 2 $ s "sd(<3 5 3 6 3 5 3 1 3 1 3 7>,8)" |* gain "1 0.95 0.95 0.9" # n 3 # pan 0.7
 ]
 
+all $ id
+all $  (timeLoop 0.25) . (rotL 3.5)
+
 hush
 
--- --------------------   last algorhythms set --------------------
-d1
+-- --------------------  section 2 - ambient sampler based section --------------------
+d4
   $ (|* gain 0.7)
-  $ every 4 (degradeBy 0.5)
-  $ fix ((|* speed 0.25) . rotL 4) (s "bev")
-  $ fix ((|* speed 0.75) . rotL 4) (s "fm")
+  -- $ every 4 (degradeBy 0.5)
+  -- $ fix ((|* speed 0.25) . rotL 4) (s "bev")
+  -- $ fix ((|* speed 0.75) . rotL 4) (s "fm")
   $ juxBy (range 0.25 0.75 $ slow 4 sine) (rotL 4 . (inside 2 rev))
   $ splice 8 "{<0 0 0 3 0 0 5 7>(<3 3 5 0 0 6>, 8), [<1 5!3 ~ 6!4> . 2 . [~ 3]], <7 4>(<3 5>, 16, 2)}"
   $ loopAt 1
@@ -65,61 +86,88 @@ jumpMod 0 1
    # verb 0.1 0.1 0.8 0.8
    # verbfreeze 1
    # gain 0.5
--
+
 d1
-   -- $ juxBy 0.3 (rev . degradeBy (slow 4 sine) . repeatCycles 4)
-   $ every 3 ((# verb 0.2 0.9 0.1 0.2) . (# gain 0.7))
-   -- $ iter 5
-   -- $ every 4 ((|* speed 0.75) . ply "1 [2|3]")
+   $ juxBy 0.3 (rev . degradeBy (slow 4 sine) . repeatCycles 4)
+  --  $ every 3 ((# verb 0.2 0.2 0.1 0.2) . (# gain 0.7))
+   $ iter 5
+   $ every 4 ((|* speed 0.75) . ply "1 [2|3]")
    $ slice 16 ("0 . 1 ~ . [2 ~] 6 . <4 5> . 1 <8 0> " + "4")  -- 5/4
    $ loopAt 6
    $ s "breaks130"
    # legato (range 1 1.5 $ slow 4 perlin)
+
+d2 $ pressBy 0.01 $ iter 5 $ rotL 0.2 $ s "clubkick ~ clubkick [~ clubkick] ~" # n 1
 
    hush
 
 -   $ s "[bev, fm:5]"
 
 
----- new ones
-
-d1  $ s "plaits" <| note "a [~ g] [c b] [g gs]" 
-  # octave "<3 4 5 6 7 8>"
-  # sustain "{1 2 1}%8"
---  # engine (slow 16 $ run 16)
-  # engine 0
-  # timbre (slow 3 sine)   
-  # harm (slow 4 saw)  
-  # morph (slow 9 saw)
-  # level (slow 8 sine)
-
-
-  d1 $ 
-     s "plaits" <| note "0 1 0 0 1 0 1 <~ 1>"
-     # octave 4
-     # engine 8
-     # mode 1
-     # harm 0.5
-     # timbre 0.2  -- timbre - shifts formants down independently of pitch
-     hush
-
+---- section 2: noisy ambient bit
   d1 $ 
   -- degradeBy 0.2 $
   (* gain 0.5) $
-  -- fast 2 $ 
-  off 0.5 ((+ note "24") . (# gain 0.4)) $
-  off 0.5 ((+ note "19") . (# gain 0.5)) $
-  off 0.33 ((+ note "[7|12]") . (# gain 0.7)) $
-  off 4.75 ((# mode 1) . (# octave 5). (# morph 0.5) . (# mu 0) . (* gain 1.2)) $
+  -- jux ((outside 4 rev) . (rotL 0.5)) $
+  every 6 (fast 2) $ 
+  every 3 (fast 2) $ 
+  -- off 0.5 ((+ note "24") . (# gain 0.4)) $
+  -- off 0.5 ((+ note "19") . (# gain 0.5) . (# pan 0.7)) $
+  -- off 0.33 ((+ note "[7|12]") . (# gain 0.7) . (# pan 0.3)) $
+  -- off 4.75 ((# mode 1) . (# octave 5). (# morph 0.5) . (# mu 0) . (* gain 1.2)) $
      s "plaits" <| note (slow 8 "0")
-    # octave 2
+    # octave 3
     # sustain 32
     # engine 8
     -- # harmbus 2 (saw)
     -- # timbrebus 1 (fast 2 sine)
     # harmbus 2 (range 0.0 0.2 $ slow 4 (saw))
-    # morph 0.6
-    # mu 4
+    -- # harm 0.1
+    # morph 0.8
+    # mu 16
+    -- clouds pos size dens tex
+    # clouds (slow 7 sine) (slow 8 sine) (rotL 8 $ slow 10 sine) (slow 8 sine)
+    -- cloudsblend wet spread fb rvb
+    # cloudsblend 0.8 (slow 4 perlin) (rotL 4 $ range 0.3 0.4 $ slow 8 saw) (slow 8 saw)
+    # cloudsmode (1)
+  
+  d2 $ s "<cp(5,8) ~ ~>"
+  d3 $ silence
+
+
+-- cheat:
+-- high morph = stable
+-- harm LFO is what i used to get the pitch bend effect
+-- timnbre needs to be a bit lower for stability
+-- start from single note, introduce layers
+-- operations: 
+   -- can switch a layer off to introduce more complexity elsewhere?
+   -- 
+
+d1 $ 
+  (* gain 0.8) $
+  layer [
+    off 6 ((+ note "[19|24]") . (* gain 0.5) . (# pan 0.7)),
+    off 4 ((+ note "[7|12]") . (* gain 0.7) . (# pan 0.3) . (# morph 0.4)) 
+  ] $
+    off 2 ((# mode 1) . (# octave 5). (# morph 0.5) . (# mu 0) . (* gain 1.2)) $
+  (slow 8 $ note "0" # harmbus 2 (range 0 0.2 $ saw) # mu "<2 4 8 16>" * gain "<1 0.98 0.94 0.94>") 
+    # s "plaits" -- timbre = brightness, morph = vibration amount of timbre, harm = frequency spread 
+    -- # timbre (slow 18 $ range 0.2 0.4 perlin)
+    # timbre 0.3
+    # sustain 32
+    # engine 8
+    # octave 3
+    # lpg 0.5 0.5
+    # level 0.8
+    # morph 0.8 --- total chaos falling if you reduce this -- "wobbliness / density"
+    -- clouds pos size dens tex -- 
+    -- # clouds 0.7 0.9 (rotL 8 $ slow 10 sine) (slow 8 sine)
+    -- # cloudsmode 3k
+
+
+
+  
 
 
 hush
