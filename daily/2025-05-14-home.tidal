@@ -14,63 +14,113 @@ d1 $ degradeBy 0 $ jux rev
 
 --- section 1 :: ravey bit based on these parts
 
-d1 $ jux rev $ fast 2 $ struct "t(<3 5 3 6 3 1 3>, 8)" (s "rave") 
+d1 $ 
+every 8 silent $
+jux rev $ fast 2 $ struct "t(<3 5 3 6 3 1 3>, 8)" (s "rave") 
   # n (timeLoop 4  $ irand 8) # legato (slow 16 $ range 1 2 perlin)
 
 d2 $ (* gain 1.1)
-  $ every 7 (mask "t t ~ ~ ~ ~ ~ t")
-  $ outside 4 ((every 4 $ iter 4) . (every' 4 1 $ degradeBy 0.5))
-  $ every 5 (fast 2)
+  -- $ every 7 (mask "t t ~ ~ ~ ~ ~ t")
+  -- $ outside 4 ((every 4 $ iter 4) . (every' 4 1 $ degradeBy 0.5))
+  -- $ every 5 (fast 2)
   $ every 10 (jux rev)
-  $ (# n (timeLoop 2 $ irand 4))
+  $ every 9 silent
   $ drumM "rolandtr909"
   [
-    (euclidFull "<3 5 5 3>" "<8 16>" "[bd]" "cp:0") 
+    (euclidFull "<3 1 3 3 7>" "<8 16>" "[bd:1]" "cp:0") 
   ]
   # verb 0.1 0.1 0.8 0.8
+
   -- # verbfreeze (slow 3 $ iter 4 "0 1 0 [0 1]") # verbdiff 1
   -- # verbgain 1 # verbwet 0.9 # verbdamp 0.1
   -- # verbhp (timeLoop 4 $ segment 4 perlin)
   -- # verbfreeze (iter 4 "0 1 0 [0 1]") # verbdiff 1
-d3 $ (* gain 0.8) $
-  every 8 ((degradeBy 0.5). (jux rev)) $
-  drumM "rolandtr909"  [
-    -- fast 2 $ s "bd(<3 5 5 8 3 1>, 8)",
-  ghost' (1/4) $ struct "t(<5 5 5 3>, 16)" (s "sd:1")
-  # gain "1 0.95 0.95 0.9" # n (repeatCycles 2 $ rotL 2 $ irand 8)
-  # legato (slow 1.3 $ range 1 2 sine)
-  # nudge (iter 4 $ "0.01 0.00 0.01 0.01" / 3)
-  , ghost $ struct "t(<5 5 5 3>, 16, <1 1 2 2 3 3 4 4>)" (s "hh")
-   # gain "0.95 0.95 0.95 1" # n (repeatCycles 2 $ irand 8) # legato 1.5
-    # nudge (iter 4 $ "0 0.01 0.02 0.01" / 2)
-]
-  # verb 0.1 0.2 0.8 0.8
-  -- # verbfreeze 1
+-- d3 $ (* gain 0.8) $
+--   every 8 ((degradeBy 0.5). (jux rev)) $
+--   drumM "rolandtr909"  [
+--     -- fast 2 $ s "bd(<3 5 5 8 3 1>, 8)",
+--   ghost' (1/4) $ struct "t(<5 5 5 3>, 16)" (s "sd:1")
+--   # gain "1 0.95 0.95 0.9" # n (repeatCycles 2 $ rotL 2 $ irand 8)
+--   # legato (slow 1.3 $ range 1 2 sine)
+--   # nudge (iter 4 $ "0.01 0.00 0.01 0.01" / 3),
+--   ghost $ struct "t(<5 5 5 3>, 16, <1 1 2 2 3 3 4 4>)" (s "hh")
+--    # gain "0.95 0.95 0.95 1" # n (repeatCycles 2 $ irand 8) # legato 1.5
+--     # nudge (iter 4 $ "0 0.01 0.02 0.01" / 2)
+-- ]
+--   # verb 0.1 0.2 0.8 0.8
+--   -- # verbfreeze 1
 
-d4 $ drumM "rolandtr909" [
-  every 9 (silent) $
-  off 2.125 ((# s "hh") . (# pan 0.5) . (# n 4) . (# hpf 1 ). (# lpf 10000) .(# cut 1)) $
-  off 1.25 ((# s "oh") . (# pan 0.3) . (# legato 3) . (# cut 1)) $
-  echoWith 2 (1/4) ((|* gain 0.75) . (# hpf (slow 8 $ rangex 200 2000 perlin)))
-  $ iter 4 $ fast 2 $ s "sd(<3 5 3 6 3 5 3 1 3 1 3 7>,8)" |* gain "1 0.95 0.95 0.9" # n 3 # pan 0.7
-]
+p "rave" $ 
+silent #
+fix (# cut 1) (n 1) $
+every 8 silent $
+jux rev $ fast 2 $ struct "t(<3 5 3 6 3 1 3>, 8)" (s "rave") 
+  # n (timeLoop 16  $ rotL 0 $ irand 8) # legato (slow 16 $ range 1 2 perlin)
+    # verb 0.1 0.2 0.8 0.8
 
-all $ id
-all $  (timeLoop 0.25) . (rotL 3.5)
+-- bd cp hh oh rim sd --- cr mt ht lt rd
+jumpMod "909"  2 $ 
+drumM "rolandtr909" [
+  -- drum: bd
+  echo 1 (1/32) 0.75 $ 
+  outside 2 (every 2 (fast 2)) $ "bd(<3 5 3 5 3 0>,8, <0 0 2>)" # n 1,
+  -- drum: cp / rim
+  -- silent $ 
+  fix ((# n (repeatCycles 5 $ irand 8)) . (ghost)) (s "rim") $
+  fix ((# legato 1 )) (s "cp") $
+   (euclidFull "<3 1 3 3 7 0>" "<8 16>" (s "[rim]") (s "cp"))# n "[0|2]" # pan 0.3
+   ,
+  -- every 7 silent $ 
+  -- jux (outside 2 (every 2 rev)) $ 
+  -- drum: sd
+  -- silent $
+  ghost $ struct ("t(<5 3 5 3 7 0 3 0>, <8 8 8 16 16>)") (s "sd")
+    # n (repeatCycles 5 $ irand 8) # pan 0.7
+    # legato (slow 4 $ range 1 2 saw),
+  -- drum :hh / oh
+  -- silent $ 
+  -- every 4 (ply 3) $ 
+  jux ((outside 4 rev) . (# cut 1)) $
+    struct (inv "t(<5 3 5 0 7 5>, <8 8 8 16 16 16>)") (s "[hh|oh]") 
+    # s "[hh|oh]*16"
+    # cut 2
+    # n (repeatCycles 5 $ irand 8) 
+    # gain 1.0
+]
+    # verb 0.1 0.2 0.8 0.8
 
 hush
+
+do 
+  all $  (timeLoop (1/16)) . (rotL 4)
+
+
+-- d4 $ drumM "rolandtr909" [
+--   every 9 (silent) $
+--   off 2.125 ((# s "hh") . (# pan 0.5) . (# n 4) . (# hpf 1 ). (# lpf 10000) .(# cut 1)) $
+--   off 1.25 ((# s "oh") . (# pan 0.3) . (# legato 3) . (# cut 1)) $
+--   echoWith 2 (1/4) ((|* gain 0.75) . (# hpf (slow 8 $ rangex 200 2000 perlin)))
+--   $ iter 4 $ fast 2 $ s "sd(<3 5 3 6 3 5 3 1 3 1 3 7>,8)" |* gain "1 0.95 0.95 0.9" # n 3 # pan 0.7
+-- ]
+
+
+hush
+all $ id
 
 -- --------------------  section 2 - ambient sampler based section --------------------
 d4
   $ (|* gain 0.7)
   -- $ every 4 (degradeBy 0.5)
   -- $ fix ((|* speed 0.25) . rotL 4) (s "bev")
-  -- $ fix ((|* speed 0.75) . rotL 4) (s "fm")
+  $ rotL 4
+  $ ghost
   $ juxBy (range 0.25 0.75 $ slow 4 sine) (rotL 4 . (inside 2 rev))
   $ splice 8 "{<0 0 0 3 0 0 5 7>(<3 3 5 0 0 6>, 8), [<1 5!3 ~ 6!4> . 2 . [~ 3]], <7 4>(<3 5>, 16, 2)}"
-  $ loopAt 1
-  $ s "[bev, fm:5]"
-  # legato 2.5
+  $ stack [
+    s "bev" * speed 0.25,
+    s "fm:5" * speed 0.75
+  ]
+  # legato 3
   # verb 0.1 0.1 0.2 0.8
   # cps (segment 64 $ range (135/240) (137/240) perlin)
   # gain 1
@@ -120,7 +170,7 @@ d2 $ pressBy 0.01 $ iter 5 $ rotL 0.2 $ s "clubkick ~ clubkick [~ clubkick] ~" #
     # sustain 32
     # engine 8
     -- # harmbus 2 (saw)
-    -- # timbrebus 1 (fast 2 sine)
+    # timbrebus 1 (fast 2 sine)
     # harmbus 2 (range 0.0 0.2 $ slow 4 (saw))
     -- # harm 0.1
     # morph 0.8
@@ -145,35 +195,108 @@ d2 $ pressBy 0.01 $ iter 5 $ rotL 0.2 $ s "clubkick ~ clubkick [~ clubkick] ~" #
    -- 
 
 d1 $ 
-  (* gain 0.8) $
-  layer [
-    off 6 ((+ note "[19|24]") . (* gain 0.5) . (# pan 0.7)),
-    off 4 ((+ note "[7|12]") . (* gain 0.7) . (# pan 0.3) . (# morph 0.4)) 
+  -- outside 5 (every 4 ((slow 2) . (|* legato 2) . (* gain 1.05))) $ 
+   (|* gain 0.5) $ 
+  -- outside 4 (every 3 (fast 2)) $ 
+      layer [
+    -- silent .
+    off 6 ( (fast 2).
+      (|+ note "[19|24]") 
+      . (|* gain 0.9) 
+      . (# pan 0.9 )
+      . (# morph 0.9)
+      ),
+    -- silent . 
+    off 4 ( (fast 2) .
+      (|+ note "[5|7]") 
+      . (|* gain 0.9) 
+      . (# pan 0.1) 
+      . (# morph 0.9)
+      ), 
+    -- silent . 
+    off 2 ( (fast 2) .
+      (|+ note "[12]") 
+      . (|* gain 0.9) 
+      . (# pan 0.5) 
+      . (# morph 0.9)
+      ), 
+    id
   ] $
-    off 2 ((# mode 1) . (# octave 5). (# morph 0.5) . (# mu 0) . (* gain 1.2)) $
-  (slow 8 $ note "0" # harmbus 2 (range 0 0.2 $ saw) # mu "<2 4 8 16>" * gain "<1 0.98 0.94 0.94>") 
+   off 2 ((# mode 1) . (|+ octave 2) . (# morph 1) . (# mu 0) . (|* gain 2)) $
+   slow 8 $
+   note "0" 
+   # octave "3" 
+   # s "plaits" 
+   # mu (slow 4 $ range 1.5 2 perlin) 
+   # harmbus 0 (range 0 0.3 saw) 
+   # morph 0.6
+   # timbre 0.8
+   # engine 8  
+   # legato 2 
+   # verb 0.1 0.1 0.8 0.8
+   # verbdiff 1
+
+hush
+jumpMod "saw" 1 $ 
+  (* gain 0.5) $
+  outside 5 (every 4 ((slow 2) . (* sustain 2) . (* gain 1.05))) $ 
+  outside 4 (every 3 ((fast 2) . (* sustain 0.5) . (* gain 0.9))) $ 
+  layer [
+    silent .
+    off 6 (
+      (+ note "[19|24]") 
+      . (* gain 0.5) 
+      . (# pan 0.9 )
+      -- . (# morph 1)
+      ),
+    silent . 
+    off 4 (
+      (+ note "[7|12]") 
+      . (* gain 0.7) 
+      . (# pan 0.1) 
+      -- . (# morph 0.8)
+      ), 
+    id
+  ] $
+    -- off 2 ((# mode 1) . (+ octave 2). (# morph 1) . (# mu 0) . (* gain 1.2)) $
+  (slow 8 $ note "0" # harmbus 0 (range 0 0.25 $ saw) # mu "<2 4 8 16>" * gain "<1 0.98 0.94 0.94>") 
     # s "plaits" -- timbre = brightness, morph = vibration amount of timbre, harm = frequency spread 
-    -- # timbre (slow 18 $ range 0.2 0.4 perlin)
-    # timbre 0.3
+    -- # timbrebus 1 (slow 18 $ range 0.2 0.4 perlin)
+    # timbre 0.2
     # sustain 32
     # engine 8
-    # octave 3
-    # lpg 0.5 0.5
-    # level 0.8
-    # morph 0.8 --- total chaos falling if you reduce this -- "wobbliness / density"
+    # octave 2
+    # lpg 0.5 0.5 -- decay color
+    # level 0.5
+    # morph 1 --- total chaos falling if you reduce this -- "wobbliness / density"
+    # verb 0.1 0.1 0.8 0.8
     -- clouds pos size dens tex -- 
-    -- # clouds 0.7 0.9 (rotL 8 $ slow 10 sine) (slow 8 sine)
+    -- # clouds 0.7 0.01 (rotL 8 $ slow 10 sine) (slow 8 sine)
+    -- # cloudsblend 1 0.5 0.3 0.5
     -- # cloudsmode 3k
 
+hush
 
+d1 $ s "bd sn"
+
+d1 $ jux (outside 2 rev) $ every 6 (+ note 12) $ every 4 (+ note 7) 
+  $ fast 2 $ iter 4 $ palindrome $ note "0 2 7 12 7 5 10 12" # s "plaits" # engine 8 # timbre (slow 16 saw) # lpg 0.8 0.8 # octave 4 # mu 2 # legato 2 # morph 0.90 
+  # verb 0.2 0.2 0.8 0.8
+  # clouds 0.1 0.5 0.05 0.1
+  # cloudsblend 0.5 0.2 0.33 0.8
+  
+hushkkk
+  d1 $ chunk 4 (|- note 5) $ jux rev $ 
+  arp "<pinkyup down thumbup up>" $ n "<c'maj'4 e4'min'8 f4'maj'4>"
+  # sound "supermandolin"
+  # sustain 2 # room 0.3 # sz 0.9
 
   
 
 
 hush
 
-timbrebus = makeBus "timbre"
-harmbus = makeBus "harm"
-
-makeBus name busId pat = pF name pat # pI ("^" ++ name) busId
-makeRecv name busId = pI ("^ ++ name") busId
+  makeBus name busId pat = pF name pat # pI ("^" ++ name) busId
+  makeRecv name busId = pI ("^ ++ name") busId
+  harmbus = makeBus "harm"
+  timbrebus = makeBus "timbre"
