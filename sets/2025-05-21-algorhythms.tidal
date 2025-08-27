@@ -2,13 +2,30 @@ makeBus name busId pat = pF name pat # pI ("^" ++ name) busId
 makeRecv name busId = pI ("^ ++ name") busId
 harmbus = makeBus "harm"
 timbrebus = makeBus "timbre"
+muBus = makeBus "mu"
 
-harmbus busid pat = (pF "harm" pat) # (pI "^harm" busid)
+d1 $ s "bd sn"
+
+d1 $
+   slow 1 $
+   note "0 1 2 3" 
+   # octave "2 3 4 3" 
+   # s "plaits" 
+   # legato 2
+   # morph "<0.9 0.8>"
+   # timbre 0.5
+   # harm 0.2
+   # engine 8  
+   # muBus 0 2
+
+   hush
+
+
 hush
-
--- section 1: ambient noisy bit
+-- ambient noisy bit
 jumpMod "saw" 2 $ 
-   (|* gain 0.5) $ 
+  ( # morph 0.1) $
+   (|* gain 0.88) $ 
   outside 4 (every 3 ((fast 2) . (|* legato 0.5))) $ 
   outside 5 (every 4 ((slow 2) . (|* legato 2) . (* gain 1.05))) $ 
       layer [
@@ -38,22 +55,22 @@ jumpMod "saw" 2 $
       ), 
     id
   ] $
-   off 2 ((# mode 1) . (|+ octave 2) . (# morph 0.8) . (# mu 0.1) . (|* gain 1.3)) $
+   off 2 ((# mode 1) . (|+ octave 2) . (# morph 0.4) . (# mu 0.1) . (|* gain 1.3)) $
    slow 8 $
    note "0" 
    # octave "<3 3 3 2>" 
    # s "plaits" 
    # mu (slow 4 $ range 1 2 perlin) 
    # harm (slow 4 $ range 0 0.2 saw)
-   # timbre 0
-   # morph 0.8
+   # timbrebus 1 (range 0.25 0.75 $ sine)
+   # morph 0.4
    # engine 8  
    # legato 2
     -- clouds pos size dens tex -- 
-   # clouds 0.7 0.9 0.01 0.01
+   # clouds 0.7 0.5 0.9 0.8
     -- cloudsblend wet spread fb reverb
-   # cloudsblend 0.5 0.2 0.3 0
-   # cloudsmode 3G
+   # cloudsblend 0.5 0.5 0.25 0
+  --  # cloudsmode 3
    -- verb wet time damp hp
    # verb 0.2 0.2 0.8 0.8
    # verbdiff 1
@@ -63,26 +80,31 @@ jumpMod "saw" 2 $
 
 --- ravey bit
 
-jumpMod "rave" 2 $ 
+all $ id
+
+all $ (timeLoop 0.125 . rotL 4)
+
+jumpMod 1 2 $ 
 silent $
+(|* gain 0.9) $
+-- silent $
 fix (# cut 1) (n 1) $
 fix (# cut 1) (n 3) $
-every 8 silent $
--- jux rev $ 
+-- every 8 silent $
+jux rev $ 
 fast 2 $ 
 struct "t(<3 5 3 6 3 1 3>, 8)" (s "rave") 
   # n (timeLoop 16  $ rotL 0 $ irand 8) 
-  -- # legato (slow 16 $ range 1 2 perlin)
+  # legato (slow 16 $ range 1 2 perlin)
     # verb 0.1 0.2 0.8 0.8
 
 -- bd cp hh oh rim sd --- cr mt ht lt rd
-jumpMod "909"  2 
-$ silent $
+jumpMod "909"  2 $
 drumM "rolandtr909" [
   -- drum: bd
   every 8 silent $
   echo 1 (1/32) 0.75 $ 
-  outside 2 (every 2 (fast 2)) $
+  -- outside 2 (every 2 (fast 2)) $
    "bd(<3 5 3 5 3 0>,8, <0 0 2>)" 
    # n 1,
   -- drum: cp / rim
@@ -91,11 +113,12 @@ drumM "rolandtr909" [
   fix ((# legato 1 )) (s "cp") $
    (euclidFull "<3 1 3 3 7 0>" "<8 16>" (s "[rim]") (s "cp"))# n "[0|2]" # pan 0.3
    ,
+  -- drum: sd
   every 7 silent $ 
   jux (outside 2 (every' 2 1 rev)) $ 
-  -- drum: sd
   -- silent $
-  ghost $ struct ("t(<5 3 5 3 7 0 3 0>, <8 8 8 16 16>)") (s "sd")
+  ghost $ 
+  struct ("t(<5 3 5 3 7 0 3 0>, <8 8 8 16 16>)") (s "sd")
     # n (repeatCycles 5 $ irand 8) # pan 0.7
     # legato (slow 4 $ range 1 2 saw),
   -- drum :hh / oh
@@ -109,3 +132,18 @@ drumM "rolandtr909" [
     # gain 1.1
 ]
     # verb 0.1 0.2 0.8 0.8
+
+
+-- bevy bit
+jumpMod "bev" 2 
+  --  $ juxBy 0.1 (
+    -- rotL (1/16) . 
+    -- rev . 
+    -- (slow 2) . 
+    -- (# ring 0.3 ) . 
+    -- (# ringf 880)
+    -- )
+   $ bite 8 (every 4 (+ 2) $ "[[0 1 <2 3> 3], [~4 ~<5 7> ~6 ~7 ]]")
+   $ loopAt 16 $ chop 64 $ s "bev"
+  --  # delay 0.5 # delayt 0.33 # delayfb (range 0.5 0.7 $ slow 4.25 sine) # lock 1
+   # verb 0.1 0.1 0.8 0.8

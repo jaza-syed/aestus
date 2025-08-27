@@ -176,14 +176,15 @@ d2 $ pressBy 0.01 $ iter 5 $ rotL 0.2 $ s "clubkick ~ clubkick [~ clubkick] ~" #
     # morph 0.8
     # mu 16
     -- clouds pos size dens tex
-    # clouds (slow 7 sine) (slow 8 sine) (rotL 8 $ slow 10 sine) (slow 8 sine)
+    -- # clouds (slow 7 sine) (slow 8 sine) (rotL 8 $ slow 10 sine) (slow 8 sine)
     -- cloudsblend wet spread fb rvb
-    # cloudsblend 0.8 (slow 4 perlin) (rotL 4 $ range 0.3 0.4 $ slow 8 saw) (slow 8 saw)
-    # cloudsmode (1)
+    -- # cloudsblend 0.8 (slow 4 perlin) (rotL 4 $ range 0.3 0.4 $ slow 8 saw) (slow 8 saw)
+    -- # cloudsmode (1)
   
   d2 $ s "<cp(5,8) ~ ~>"
   d3 $ silence
 
+hush
 
 -- cheat:
 -- high morph = stable
@@ -238,8 +239,10 @@ d1 $
    -- verb wet time damp hp
    # verb 0.1 0.1 0.8 0.8
    # verbdiff 0.5
+   hush
 
 hush
+
 jumpMod "saw" 1 $ 
   (* gain 0.5) $
   outside 5 (every 4 ((slow 2) . (* sustain 2) . (* gain 1.05))) $ 

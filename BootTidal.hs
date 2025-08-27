@@ -124,8 +124,8 @@ let getState = streamGet tidal
 :set prompt "tidal> "
 :set prompt-cont ""
 
-:script "/Users/jsyed/prod/aestus/fm-params.tidal"
-:script "/Users/jsyed/prod/aestus/mi-ugens-params.tidal"
-:script "/Users/jsyed/prod/aestus/tdm.tidal"
+:script "/Users/jsyed/code/aestus/fm-params.tidal"
+:script "/Users/jsyed/code/aestus/mi-ugens-params.tidal"
+:script "/Users/jsyed/code/aestus/tdm.tidal"
 
 default (Pattern String, Integer, Double)

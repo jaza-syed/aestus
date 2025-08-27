@@ -2,5 +2,6 @@
     "files.associations": {
         "*.tidal": "haskell"
     },
-    "tidalcycles.bootTidalPath" : "/Users/jsyed/prod/aestus/BootTidal.hs"
+    "tidalcycles.bootTidalPath": "/Users/jsyed/code/aestus/BootTidal.hs",
+    "workbench.colorTheme": "Visual Studio Dark"
 }
